@@ -42,20 +42,32 @@ jobs:
       - name: Build RJPW Authenticator debug APK (repo debug keystore)
         run: ./gradlew :authenticator:assembleDebug --stacktrace
 
-      - name: Upload RJPW fdroid debug APK
+      - name: Build RJPW Authenticator release APK (unsigned)
+        run: ./gradlew :authenticator:assembleRelease --stacktrace
+
+      # Since v1.0.3 both modules ship ABI-split APKs (arm64-v8a +
+      # armeabi-v7a, no universal APK); each artifact below contains the
+      # per-ABI APKs of one module/variant.
+      - name: Upload RJPW fdroid debug APKs (ABI splits)
         uses: actions/upload-artifact@v4
         with:
           name: RJPW-fdroid-debug
           path: app/build/outputs/apk/fdroid/debug/*.apk
 
-      - name: Upload RJPW fdroid release unsigned APK
+      - name: Upload RJPW fdroid release unsigned APKs (ABI splits)
         uses: actions/upload-artifact@v4
         with:
           name: RJPW-fdroid-release-unsigned
           path: app/build/outputs/apk/fdroid/release/*.apk
 
-      - name: Upload RJPW Authenticator debug APK
+      - name: Upload RJPW Authenticator debug APKs (ABI splits)
         uses: actions/upload-artifact@v4
         with:
           name: RJPW-Authenticator-debug
           path: authenticator/build/outputs/apk/debug/*.apk
+
+      - name: Upload RJPW Authenticator release unsigned APKs (ABI splits)
+        uses: actions/upload-artifact@v4
+        with:
+          name: RJPW-Authenticator-release-unsigned
+          path: authenticator/build/outputs/apk/release/*.apk

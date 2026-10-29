@@ -1,4 +1,5 @@
 import com.android.build.api.dsl.ApplicationExtension
+import com.android.build.api.variant.FilterConfiguration
 import com.android.build.api.variant.impl.VariantOutputImpl
 import com.google.protobuf.gradle.proto
 import org.gradle.kotlin.dsl.support.uppercaseFirstChar
@@ -96,7 +97,14 @@ configure<ApplicationExtension> {
             )
             signingConfig = signingConfigs.getByName("debug")
             isDebuggable = true
-            isMinifyEnabled = false
+            // Same shrinking as this module's release build type (minify with
+            // the same ProGuard files; release does not shrink resources, so
+            // debug does not either).
+            isMinifyEnabled = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro",
+            )
             buildConfigField(type = "boolean", name = "HAS_DEBUG_MENU", value = "true")
         }
 
@@ -116,6 +124,20 @@ configure<ApplicationExtension> {
             buildConfigField(type = "boolean", name = "HAS_DEBUG_MENU", value = "false")
         }
     }
+
+    // Ship per-ABI APKs instead of one universal APK carrying every ABI's
+    // copy of the native SDK library. arm64-v8a covers current phones,
+    // armeabi-v7a legacy 32-bit devices; the x86 emulator ABIs are
+    // intentionally not shipped.
+    splits {
+        abi {
+            isEnable = true
+            reset()
+            include("arm64-v8a", "armeabi-v7a")
+            isUniversalApk = false
+        }
+    }
+
     compileOptions {
         sourceCompatibility(libs.versions.jvmTarget.get())
         targetCompatibility(libs.versions.jvmTarget.get())
@@ -159,27 +181,40 @@ androidComponents {
             .outputs
             .mapNotNull { it as? VariantOutputImpl }
             .forEach { output ->
-                // Set the APK output filename.
-                output.outputFileName.set("$applicationId.apk")
-
-                val renameTaskName = "rename${variantName.uppercaseFirstChar()}AabFiles"
-                tasks.register(renameTaskName) {
-                    group = "build"
-                    description = "Renames the bundle files for $variantName variant"
-                    doLast {
-                        val namespace = appVariant.namespace.get()
-                        renameFile(
-                            "$bundlesDir/$variantName/$namespace-$buildType.aab",
-                            "$applicationId.aab",
-                        )
-                    }
+                // ABI splits produce one output per ABI: suffix the ABI so the
+                // split APKs do not overwrite each other.
+                val abiName = output
+                    .filters
+                    .firstOrNull { it.filterType == FilterConfiguration.FilterType.ABI }
+                    ?.identifier
+                val apkBaseName = if (abiName != null) {
+                    "$applicationId-$abiName"
+                } else {
+                    applicationId
                 }
-                // Force renaming task to execute after the variant is built.
-                val bundleTaskName = "bundle${variantName.uppercaseFirstChar()}"
-                tasks
-                    .named { it == bundleTaskName }
-                    .configureEach { finalizedBy(renameTaskName) }
+
+                // Set the APK output filename.
+                output.outputFileName.set("$apkBaseName.apk")
             }
+
+        // Bundles are not ABI-split: register the AAB rename once per variant.
+        val renameTaskName = "rename${variantName.uppercaseFirstChar()}AabFiles"
+        tasks.register(renameTaskName) {
+            group = "build"
+            description = "Renames the bundle files for $variantName variant"
+            doLast {
+                val namespace = appVariant.namespace.get()
+                renameFile(
+                    "$bundlesDir/$variantName/$namespace-$buildType.aab",
+                    "$applicationId.aab",
+                )
+            }
+        }
+        // Force renaming task to execute after the variant is built.
+        val bundleTaskName = "bundle${variantName.uppercaseFirstChar()}"
+        tasks
+            .named { it == bundleTaskName }
+            .configureEach { finalizedBy(renameTaskName) }
     }
 }
 
