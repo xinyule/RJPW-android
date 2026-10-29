@@ -691,7 +691,7 @@ private fun createMockAccounts(number: Int): List<UserState.Account> {
                 name = null,
                 email = "mockEmail-$it",
                 avatarColorHex = "$it",
-                environment = Environment.Prod.Us,
+                environment = Environment.SelfHosted.DEFAULT,
                 isPremium = true,
                 isPremiumFromSelf = true,
                 isLoggedIn = true,

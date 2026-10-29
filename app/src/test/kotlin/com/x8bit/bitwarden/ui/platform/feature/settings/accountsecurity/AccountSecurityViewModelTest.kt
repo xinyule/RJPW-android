@@ -332,7 +332,7 @@ class AccountSecurityViewModelTest : BaseViewModelTest() {
     @Test
     fun `on ChangeMasterPasswordClick should emit NavigateToChangeMasterPassword with correct URL based on US and EU environments`() =
         runTest {
-            fakeEnvironmentRepository.environment = Environment.Prod.Us
+            fakeEnvironmentRepository.environment = Environment.SelfHosted.DEFAULT
             val viewModel = createViewModel()
             viewModel.eventFlow.test {
 
@@ -344,7 +344,7 @@ class AccountSecurityViewModelTest : BaseViewModelTest() {
                     awaitItem(),
                 )
 
-                fakeEnvironmentRepository.environment = Environment.Prod.Eu
+                fakeEnvironmentRepository.environment = Environment.SelfHosted.DEFAULT
 
                 viewModel.trySendAction(AccountSecurityAction.ChangeMasterPasswordClick)
                 assertEquals(
@@ -450,7 +450,7 @@ class AccountSecurityViewModelTest : BaseViewModelTest() {
     @Test
     fun `on TwoStepLoginClick should emit NavigateToTwoStepLogin with correct URL based on US and EU environments`() =
         runTest {
-            fakeEnvironmentRepository.environment = Environment.Prod.Us
+            fakeEnvironmentRepository.environment = Environment.SelfHosted.DEFAULT
             val viewModel = createViewModel()
             viewModel.eventFlow.test {
 
@@ -462,7 +462,7 @@ class AccountSecurityViewModelTest : BaseViewModelTest() {
                     awaitItem(),
                 )
 
-                fakeEnvironmentRepository.environment = Environment.Prod.Eu
+                fakeEnvironmentRepository.environment = Environment.SelfHosted.DEFAULT
 
                 viewModel.trySendAction(AccountSecurityAction.TwoStepLoginClick)
                 assertEquals(
@@ -939,7 +939,7 @@ private val DEFAULT_USER_STATE = UserState(
             name = "Active User",
             email = "active@bitwarden.com",
             avatarColorHex = "#aa00aa",
-            environment = Environment.Prod.Us,
+            environment = Environment.SelfHosted.DEFAULT,
             isPremium = true,
             isPremiumFromSelf = true,
             isLoggedIn = true,

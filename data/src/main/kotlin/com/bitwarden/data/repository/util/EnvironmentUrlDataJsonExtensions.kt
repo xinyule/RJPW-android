@@ -5,24 +5,16 @@ import com.bitwarden.data.repository.model.Environment
 
 /**
  * Converts a raw [EnvironmentUrlDataJson] to an externally-consumable [Environment].
+ *
+ * RJPW: Every environment is a self-hosted environment; there are no pre-configured
+ * official cloud regions to match against.
  */
 fun EnvironmentUrlDataJson.toEnvironmentUrls(): Environment =
-    when (this) {
-        EnvironmentUrlDataJson.DEFAULT_US,
-        EnvironmentUrlDataJson.DEFAULT_LEGACY_US,
-            -> Environment.Prod.Us
-
-        EnvironmentUrlDataJson.DEFAULT_EU,
-        EnvironmentUrlDataJson.DEFAULT_LEGACY_EU,
-            -> Environment.Prod.Eu
-
-        EnvironmentUrlDataJson.DEFAULT_FED_RAMP -> Environment.Prod.FedRamp
-        else -> Environment.SelfHosted(environmentUrlData = this)
-    }
+    Environment.SelfHosted(environmentUrlData = this)
 
 /**
- * Converts a nullable [EnvironmentUrlDataJson] to an [Environment], where `null` values default to
- * the US environment.
+ * Converts a nullable [EnvironmentUrlDataJson] to an [Environment], where `null` values
+ * default to the user's own Vaultwarden server.
  */
 fun EnvironmentUrlDataJson?.toEnvironmentUrlsOrDefault(): Environment =
-    this?.toEnvironmentUrls() ?: Environment.Prod.Us
+    this?.toEnvironmentUrls() ?: Environment.SelfHosted.DEFAULT

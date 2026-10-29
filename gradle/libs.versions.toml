@@ -3,7 +3,7 @@
 
 # App version
 appVersionCode = "1"
-appVersionName = "2026.9.0"
+appVersionName = "1.0.1"
 
 # SDK Versions
 compileSdk = "37"
@@ -34,7 +34,6 @@ coil = "3.6.3"
 crashlytics = "3.0.8"
 detekt = "1.23.8"
 firebaseBom = "35.0.0"
-googleBilling = "9.1.0"
 googleMlkitTextRecognition = "16.0.1"
 googleGuava = "33.7.2-jre"
 googleProtoBufJava = "4.36.2"
@@ -103,7 +102,6 @@ coil-coil-gif = { module = "io.coil-kt.coil3:coil-gif", version.ref = "coil" }
 coil-coil-network-okhttp = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coil" }
 detekt-detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 detekt-detekt-rules = { module = "io.gitlab.arturbosch.detekt:detekt-rules-libraries", version.ref = "detekt" }
-google-billing = { module = "com.android.billingclient:billing", version.ref = "googleBilling" }
 google-firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
 google-firebase-cloud-messaging = { module = "com.google.firebase:firebase-messaging" }
 google-firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }

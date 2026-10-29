@@ -82,7 +82,7 @@ class DuoUtilsTest {
     @Test
     fun `getDuoCallbackTokenResult for app link should return MissingToken when state is null`() {
         val intent = mockk<Intent> {
-            every { data?.host } returns "bitwarden.com"
+            every { data?.host } returns "pw.7052.cn"
             every { data?.scheme } returns "https"
             every { data?.path } returns "/duo-callback"
             every { data?.getQueryParameter("code") } returns "code"
@@ -96,7 +96,7 @@ class DuoUtilsTest {
     @Test
     fun `getDuoCallbackTokenResult for app link should return Success when all data is present`() {
         val intent = mockk<Intent> {
-            every { data?.host } returns "bitwarden.eu"
+            every { data?.host } returns "pw.7052.cn"
             every { data?.scheme } returns "https"
             every { data?.path } returns "/duo-callback"
             every { data?.getQueryParameter("code") } returns "code"

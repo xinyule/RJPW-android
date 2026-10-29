@@ -52,10 +52,7 @@ class EnvironmentViewModel @Inject constructor(
     buildInfoManager: BuildInfoManager,
 ) : BaseViewModel<EnvironmentState, EnvironmentEvent, EnvironmentAction>(
     initialState = savedStateHandle[KEY_STATE] ?: run {
-        val environmentUrlData = when (val environment = environmentRepository.environment) {
-            is Environment.Prod -> EnvironmentUrlDataJson(base = "")
-            is Environment.SelfHosted -> environment.environmentUrlData
-        }
+        val environmentUrlData = environmentRepository.environment.environmentUrlData
         val keyUri = environmentUrlData.keyUri?.toUri()
         val keyAlias = keyUri?.path?.trim('/').orEmpty()
         val keyHost = MutualTlsKeyHost.entries.find { it.name == keyUri?.authority }

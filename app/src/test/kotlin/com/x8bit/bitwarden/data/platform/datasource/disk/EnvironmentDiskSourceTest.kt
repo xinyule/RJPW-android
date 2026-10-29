@@ -63,7 +63,7 @@ class EnvironmentDiskSourceTest {
 
     @Test
     fun `getPreAuthEnvironmentUrlDataForEmail should pull from SharedPreferences`() {
-        val mockUrls = Environment.Prod.Us.environmentUrlData
+        val mockUrls = Environment.SelfHosted.DEFAULT.environmentUrlData
         fakeSharedPreferences
             .edit {
                 putString(
@@ -81,7 +81,7 @@ class EnvironmentDiskSourceTest {
 
     @Test
     fun `storePreAuthEnvironmentUrlDataForEmail should update SharedPreferences`() {
-        val mockUrls = Environment.Prod.Us.environmentUrlData
+        val mockUrls = Environment.SelfHosted.DEFAULT.environmentUrlData
         environmentDiskSource.storePreAuthEnvironmentUrlDataForEmail(
             userEmail = EMAIL,
             urls = mockUrls,

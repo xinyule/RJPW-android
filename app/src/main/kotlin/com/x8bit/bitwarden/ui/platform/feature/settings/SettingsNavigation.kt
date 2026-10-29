@@ -35,8 +35,6 @@ import com.x8bit.bitwarden.ui.platform.feature.settings.other.navigateToOther
 import com.x8bit.bitwarden.ui.platform.feature.settings.other.otherDestination
 import com.x8bit.bitwarden.ui.platform.feature.settings.vault.navigateToVaultSettings
 import com.x8bit.bitwarden.ui.platform.feature.settings.vault.vaultSettingsDestination
-import com.x8bit.bitwarden.ui.platform.feature.premium.plan.navigateToPlan
-import com.x8bit.bitwarden.ui.platform.feature.premium.plan.planDestination
 import com.x8bit.bitwarden.ui.vault.feature.importitems.importItemsDestination
 import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.Serializable
@@ -140,7 +138,7 @@ fun NavGraphBuilder.settingsGraph(
                 onNavigateToAutoFill = { navController.navigateToAutoFill() },
                 onNavigateToOther = { navController.navigateToOther(isPreAuth = false) },
                 onNavigateToVault = { navController.navigateToVaultSettings() },
-                onNavigateToPlan = { navController.navigateToPlan() },
+                onNavigateToPlan = { /* no-op: the plan screen has been removed */ },
             )
         }
         aboutDestination(
@@ -185,10 +183,6 @@ fun NavGraphBuilder.settingsGraph(
         )
         blockAutoFillDestination(onNavigateBack = { navController.popBackStack() })
         privilegedAppsListDestination(onNavigateBack = { navController.popBackStack() })
-        planDestination(
-            onNavigateBack = { navController.popBackStack() },
-            onNavigateToUpgradedToPremium = onNavigateToUpgradedToPremium,
-        )
     }
 }
 

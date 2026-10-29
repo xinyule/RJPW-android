@@ -87,22 +87,12 @@ class MainActivity : AppCompatActivity() {
         mainViewModel.trySendAction(MainAction.CookieAcquisitionResult(it))
     }
 
-    private val premiumCheckoutLauncher = AuthTabIntent.registerActivityResultLauncher(this) {
-        mainViewModel.trySendAction(MainAction.PremiumCheckoutResult(it))
-    }
-
-    private val stripePortalLauncher = AuthTabIntent.registerActivityResultLauncher(this) {
-        mainViewModel.trySendAction(MainAction.StripePortalResult(it))
-    }
-
     private val authTabLaunchers by lazy {
         AuthTabLaunchers(
             duo = duoLauncher,
             sso = ssoLauncher,
             webAuthn = webAuthnLauncher,
             cookie = cookieLauncher,
-            premiumCheckout = premiumCheckoutLauncher,
-            stripePortal = stripePortalLauncher,
         )
     }
 

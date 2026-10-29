@@ -57,8 +57,6 @@ class EnterpriseSignOnScreenTest : BitwardenComposeTest() {
                 sso = ssoLauncher,
                 webAuthn = mockk(),
                 cookie = mockk(),
-                premiumCheckout = mockk(),
-                stripePortal = mockk(),
             ),
             intentManager = intentManager,
         ) {

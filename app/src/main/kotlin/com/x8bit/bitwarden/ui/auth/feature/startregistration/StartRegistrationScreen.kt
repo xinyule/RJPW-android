@@ -360,7 +360,7 @@ private fun StartRegistrationContentFilledOut_preview() {
         StartRegistrationContent(
             state = StartRegistrationState(
                 emailInput = "e@mail.com",
-                selectedEnvironmentType = Environment.Type.US,
+                selectedEnvironmentType = Environment.Type.SELF_HOSTED,
                 nameInput = "Test User",
                 isReceiveMarketingEmailsToggled = true,
                 isContinueButtonEnabled = true,
@@ -389,7 +389,7 @@ private fun StartRegistrationContentEmpty_preview() {
         StartRegistrationContent(
             state = StartRegistrationState(
                 emailInput = "",
-                selectedEnvironmentType = Environment.Type.US,
+                selectedEnvironmentType = Environment.Type.SELF_HOSTED,
                 nameInput = "",
                 isReceiveMarketingEmailsToggled = false,
                 isContinueButtonEnabled = false,

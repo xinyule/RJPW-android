@@ -39,7 +39,7 @@ class GetTokenResponseExtensionsTest {
             SINGLE_USER_STATE_1,
             GET_TOKEN_RESPONSE_SUCCESS.toUserState(
                 previousUserState = null,
-                environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+                environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
                 passwordPassesPolicy = true,
             ),
         )
@@ -53,7 +53,7 @@ class GetTokenResponseExtensionsTest {
             MULTI_USER_STATE,
             GET_TOKEN_RESPONSE_SUCCESS.toUserState(
                 previousUserState = SINGLE_USER_STATE_2,
-                environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+                environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
                 passwordPassesPolicy = true,
             ),
         )
@@ -81,7 +81,7 @@ class GetTokenResponseExtensionsTest {
             expectedState,
             tokenResponse.toUserState(
                 previousUserState = null,
-                environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+                environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
                 passwordPassesPolicy = true,
             ),
         )
@@ -106,7 +106,7 @@ class GetTokenResponseExtensionsTest {
             expectedState,
             GET_TOKEN_RESPONSE_SUCCESS.toUserState(
                 previousUserState = null,
-                environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+                environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
                 passwordPassesPolicy = false,
             ),
         )
@@ -135,7 +135,7 @@ class GetTokenResponseExtensionsTest {
             expectedState,
             tokenResponse.toUserState(
                 previousUserState = null,
-                environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+                environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
                 passwordPassesPolicy = false,
             ),
         )
@@ -164,7 +164,7 @@ class GetTokenResponseExtensionsTest {
             expectedState,
             tokenResponse.toUserState(
                 previousUserState = null,
-                environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+                environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
                 passwordPassesPolicy = false,
             ),
         )
@@ -193,7 +193,7 @@ class GetTokenResponseExtensionsTest {
             expectedState,
             tokenResponse.toUserState(
                 previousUserState = null,
-                environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+                environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
                 passwordPassesPolicy = false,
             ),
         )
@@ -277,7 +277,7 @@ private val PROFILE_1 = AccountJson.Profile(
 private val ACCOUNT_1 = AccountJson(
     profile = PROFILE_1,
     settings = AccountJson.Settings(
-        environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+        environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
     ),
 )
 private val ACCOUNT_2 = AccountJson(
@@ -301,7 +301,7 @@ private val ACCOUNT_2 = AccountJson(
         creationDate = null,
     ),
     settings = AccountJson.Settings(
-        environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+        environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
     ),
 )
 private val SINGLE_USER_STATE_1 = UserStateJson(

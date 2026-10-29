@@ -1,8 +1,5 @@
 package com.x8bit.bitwarden.data.billing.manager
 
-import com.x8bit.bitwarden.data.billing.model.PremiumCard
-import com.x8bit.bitwarden.data.billing.repository.model.SubscriptionStatusState
-import com.x8bit.bitwarden.data.billing.repository.model.UpgradeLifecycleState
 import kotlinx.coroutines.flow.StateFlow
 
 /**
@@ -12,14 +9,19 @@ const val UPGRADED_TO_PREMIUM_LEARN_MORE_URL: String =
     "https://bitwarden.com/help/password-manager-plans/"
 
 /**
- * Manages Premium upgrade state for the active user.
+ * Manages Premium state for the active user.
+ *
+ * RJPW: There is no in-app billing or Premium purchase flow. Premium status is whatever the
+ * server reports for the account during sync (for example, a self-hosted Vaultwarden server
+ * granting Premium), surfaced here directly from the synced profile.
  */
 interface PremiumStateManager {
 
     /**
-     * Emits a [PremiumCard] for the current user indicating what Premium card should be displayed.
+     * Emits `true` when the active user has Premium according to the server-synced profile —
+     * either granted personally or through an organization — and `false` otherwise.
      */
-    val premiumCardStateFlow: StateFlow<PremiumCard>
+    val isPremiumFlow: StateFlow<Boolean>
 
     /**
      * Emits `true` while the active user is eligible to see the "Upgraded to Premium" action
@@ -29,35 +31,19 @@ interface PremiumStateManager {
     val isUpgradedToPremiumCardEligibleFlow: StateFlow<Boolean>
 
     /**
-     * Emits `true` when the active user is eligible to see the Plan row in Settings, or `false`
-     * otherwise.
-     */
-    val isPlanRowEligibleFlow: StateFlow<Boolean>
-
-    /**
-     * Emits the active user's latest [SubscriptionStatusState].
-     */
-    val subscriptionStatusStateFlow: StateFlow<SubscriptionStatusState>
-
-    /**
-     * Emits the active user's current [UpgradeLifecycleState].
-     */
-    val upgradeLifecycleStateFlow: StateFlow<UpgradeLifecycleState>
-
-    /**
-     * Emits whether the current state should be treated as self-hosted for premium upgrade
-     * gating. Reactive equivalent of [isSelfHosted].
+     * Emits whether the current environment is self-hosted. Reactive equivalent of
+     * [isSelfHosted].
      */
     val isSelfHostedFlow: StateFlow<Boolean>
 
     /**
-     * `true` when the current state should be treated as self-hosted for premium upgrade
-     * gating, or `false` otherwise.
+     * `true` when the current environment is self-hosted, or `false` otherwise.
      */
     val isSelfHosted: Boolean
 
     /**
-     * Returns `true` when the in-app upgrade flow is available, or `false` otherwise.
+     * Returns whether the in-app upgrade flow is available. Always `false`: upgrades are not
+     * sold in-app; Premium is granted and managed by the server.
      */
     fun isInAppUpgradeAvailable(): Boolean
 
@@ -72,10 +58,4 @@ interface PremiumStateManager {
      * never re-appears for that user.
      */
     fun dismissUpgradedToPremiumCard()
-
-    /**
-     * Marks the active user as having a Premium upgrade in flight (Stripe checkout completed
-     * but the server has not yet flipped `isPremium`).
-     */
-    fun markPremiumUpgradePending(userId: String)
 }

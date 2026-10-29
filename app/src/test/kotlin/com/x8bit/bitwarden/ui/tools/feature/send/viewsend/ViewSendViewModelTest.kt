@@ -58,7 +58,7 @@ class ViewSendViewModelTest : BaseViewModelTest() {
         every { getSendStateFlow(sendId = any()) } returns mutableSendStateFlow
     }
     private val environmentRepository = mockk<EnvironmentRepository> {
-        every { environment } returns Environment.Prod.Us
+        every { environment } returns Environment.SelfHosted.DEFAULT
     }
     private val mutableEffectiveSendPolicyFlow = MutableStateFlow(DEFAULT_EFFECTIVE_SEND_POLICY)
     private val policyManager = mockk<PolicyManager> {

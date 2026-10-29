@@ -99,7 +99,7 @@ class LandingViewModelTest : BaseViewModelTest() {
                     name = "name",
                     email = "email",
                     avatarColorHex = "avatarColorHex",
-                    environment = Environment.Prod.Us,
+                    environment = Environment.SelfHosted.DEFAULT,
                     isPremium = true,
                     isPremiumFromSelf = true,
                     isLoggedIn = true,
@@ -293,7 +293,7 @@ class LandingViewModelTest : BaseViewModelTest() {
             name = "name",
             email = rememberedEmail,
             avatarColorHex = "avatarColorHex",
-            environment = Environment.Prod.Us,
+            environment = Environment.SelfHosted.DEFAULT,
             isPremium = true,
             isPremiumFromSelf = true,
             isLoggedIn = true,
@@ -353,7 +353,7 @@ class LandingViewModelTest : BaseViewModelTest() {
                 name = "name",
                 email = rememberedEmail,
                 avatarColorHex = "avatarColorHex",
-                environment = Environment.Prod.Us,
+                environment = Environment.SelfHosted.DEFAULT,
                 isPremium = true,
                 isPremiumFromSelf = true,
                 isLoggedIn = true,
@@ -392,12 +392,12 @@ class LandingViewModelTest : BaseViewModelTest() {
 
             viewModel.eventFlow.test {
                 viewModel.trySendAction(
-                    LandingAction.EnvironmentTypeSelect(Environment.Prod.Eu.type),
+                    LandingAction.EnvironmentTypeSelect(Environment.SelfHosted.DEFAULT.type),
                 )
                 assertEquals(
                     initialState.copy(
-                        selectedEnvironmentLabel = Environment.Prod.Eu.label,
-                        selectedEnvironmentType = Environment.Prod.Eu.type,
+                        selectedEnvironmentLabel = Environment.SelfHosted.DEFAULT.label,
+                        selectedEnvironmentType = Environment.SelfHosted.DEFAULT.type,
                     ),
                     viewModel.stateFlow.value,
                 )
@@ -419,7 +419,7 @@ class LandingViewModelTest : BaseViewModelTest() {
                 name = "name",
                 email = rememberedEmail,
                 avatarColorHex = "avatarColorHex",
-                environment = Environment.Prod.Us,
+                environment = Environment.SelfHosted.DEFAULT,
                 isPremium = true,
                 isPremiumFromSelf = true,
                 isLoggedIn = false,
@@ -545,23 +545,6 @@ class LandingViewModelTest : BaseViewModelTest() {
         }
 
     @Test
-    fun `EnvironmentTypeSelect should update value of selected region for US or EU`() = runTest {
-        val inputEnvironmentType = Environment.Type.EU
-        val viewModel = createViewModel()
-        viewModel.stateFlow.test {
-            awaitItem()
-            viewModel.trySendAction(LandingAction.EnvironmentTypeSelect(inputEnvironmentType))
-            assertEquals(
-                DEFAULT_STATE.copy(
-                    selectedEnvironmentType = Environment.Type.EU,
-                    selectedEnvironmentLabel = Environment.Prod.Eu.label,
-                ),
-                awaitItem(),
-            )
-        }
-    }
-
-    @Test
     fun `EnvironmentTypeSelect should emit NavigateToEnvironment for self-hosted`() = runTest {
         val inputEnvironmentType = Environment.Type.SELF_HOSTED
         val viewModel = createViewModel()
@@ -584,7 +567,7 @@ class LandingViewModelTest : BaseViewModelTest() {
             name = null,
             email = expectedEmail,
             avatarColorHex = "lorem",
-            environment = Environment.Prod.Us,
+            environment = Environment.SelfHosted.DEFAULT,
             isPremium = false,
             isPremiumFromSelf = false,
             isLoggedIn = false,
@@ -623,7 +606,7 @@ class LandingViewModelTest : BaseViewModelTest() {
             name = null,
             email = expectedEmail,
             avatarColorHex = "lorem",
-            environment = Environment.Prod.Us,
+            environment = Environment.SelfHosted.DEFAULT,
             isPremium = false,
             isPremiumFromSelf = false,
             isLoggedIn = false,
@@ -693,8 +676,8 @@ private val DEFAULT_STATE = LandingState(
     emailInput = "",
     isContinueButtonEnabled = false,
     isRememberEmailEnabled = false,
-    selectedEnvironmentType = Environment.Type.US,
-    selectedEnvironmentLabel = Environment.Prod.Us.label,
+    selectedEnvironmentType = Environment.Type.SELF_HOSTED,
+    selectedEnvironmentLabel = Environment.SelfHosted.DEFAULT.label,
     isSelectedEnvironmentFedRamp = false,
     dialog = null,
     accountSummaries = persistentListOf(),

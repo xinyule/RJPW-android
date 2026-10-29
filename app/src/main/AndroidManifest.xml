@@ -81,10 +81,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data android:scheme="https" />
-                <data android:host="*.bitwarden.com" />
-                <data android:host="*.bitwarden.eu" />
-                <data android:host="*.bitwarden.pw" />
-                <data android:host="*.bitwarden-gov.com" />
+                <data android:host="pw.7052.cn" />
                 <data android:pathPattern="/redirect-connector.*" />
             </intent-filter>
             <intent-filter>
@@ -170,10 +167,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data android:scheme="https" />
-                <data android:host="bitwarden.com" />
-                <data android:host="bitwarden.eu" />
-                <data android:host="bitwarden.pw" />
-                <data android:host="bitwarden-gov.com" />
+                <data android:host="pw.7052.cn" />
                 <data android:pathPattern="/duo-callback" />
                 <data android:pathPattern="/sso-callback" />
                 <data android:pathPattern="/webauthn-callback" />
