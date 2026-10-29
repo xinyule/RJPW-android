@@ -58,5 +58,4 @@ class ShortcutUtilsTest {
     }
 
     @Suppress("MaxLineLength")
-    @Suppress("MaxLineLength")
 }

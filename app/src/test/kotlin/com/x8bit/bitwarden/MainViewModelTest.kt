@@ -865,10 +865,6 @@ class MainViewModelTest : BaseViewModelTest() {
     }
 
     @Suppress("MaxLineLength")
-    @Suppress("MaxLineLength")
-    @Suppress("MaxLineLength")
-    @Suppress("MaxLineLength")
-    @Suppress("MaxLineLength")
     @Test
     fun `on ReceiveNewIntent with a password generator deeplink data should set the special circumstance to GeneratorShortcut`() {
         val viewModel = createViewModel()
@@ -1161,7 +1157,6 @@ class MainViewModelTest : BaseViewModelTest() {
         }
     }
 
-    @Suppress("MaxLineLength")
     @Suppress("MaxLineLength")
     @Test
     fun `on handleResizeHasBeenRequested should set hasResizeBeenRequested as true`() = runTest {

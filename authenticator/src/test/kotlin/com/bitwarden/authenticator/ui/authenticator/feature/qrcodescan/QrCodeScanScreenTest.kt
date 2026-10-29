@@ -96,7 +96,7 @@ class QrCodeScanScreenTest : AuthenticatorComposeTest() {
             )
         }
         composeTestRule
-            .onNodeWithText("Save to Bitwarden")
+            .onNodeWithText("Save to RJPW")
             .assertIsDisplayed()
             .assert(hasAnyAncestor(isDialog()))
             .performClick()
@@ -107,7 +107,7 @@ class QrCodeScanScreenTest : AuthenticatorComposeTest() {
             .onNodeWithText("Save option as default")
             .performClick()
         composeTestRule
-            .onNodeWithText("Save to Bitwarden")
+            .onNodeWithText("Save to RJPW")
             .assertIsDisplayed()
             .assert(hasAnyAncestor(isDialog()))
             .performClick()
