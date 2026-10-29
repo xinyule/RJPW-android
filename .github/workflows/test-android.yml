@@ -24,12 +24,9 @@ jobs:
           java-version: "21"
           cache: gradle
 
-      - name: Install Android SDK components for compileSdk 37
-        run: |
-          SDKMANAGER="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
-          yes | "$SDKMANAGER" --licenses > /dev/null || true
-          "$SDKMANAGER" "platforms;android-37" "build-tools;37.0.0"
-
+      # No explicit sdkmanager step: the runner image ships the Android SDK
+      # with licenses accepted and AGP auto-downloads the compileSdk 37
+      # platform/build-tools (same approach as the upstream CI).
       - name: Run unit tests
         run: >
           ./gradlew
