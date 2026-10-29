@@ -9,6 +9,12 @@ on:
 permissions:
   contents: read
 
+# settings.gradle.kts reads the GitHub Packages credential for
+# com.bitwarden:sdk-android from the GITHUB_TOKEN env var
+# (same wiring as the upstream workflows).
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 jobs:
   test:
     name: Unit tests
