@@ -4,6 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
 import com.bitwarden.core.data.manager.model.FlagKey
 import com.bitwarden.core.data.repository.util.bufferedMutableSharedFlow
+import com.bitwarden.data.datasource.disk.model.EnvironmentUrlDataJson
 import com.bitwarden.data.datasource.disk.model.ServerConfig
 import com.bitwarden.data.repository.ServerConfigRepository
 import com.bitwarden.data.repository.model.Environment
@@ -390,17 +391,21 @@ class LandingViewModelTest : BaseViewModelTest() {
                 viewModel.stateFlow.value,
             )
 
+            // Switch the current environment to a different self-hosted server, so the
+            // existing account (on the default server) no longer matches the selection.
+            fakeEnvironmentRepository.environment = Environment.SelfHosted(
+                environmentUrlData = EnvironmentUrlDataJson(
+                    base = "https://example.com",
+                ),
+            )
+            assertEquals(
+                initialState.copy(
+                    selectedEnvironmentLabel = "example.com",
+                ),
+                viewModel.stateFlow.value,
+            )
+
             viewModel.eventFlow.test {
-                viewModel.trySendAction(
-                    LandingAction.EnvironmentTypeSelect(Environment.SelfHosted.DEFAULT.type),
-                )
-                assertEquals(
-                    initialState.copy(
-                        selectedEnvironmentLabel = Environment.SelfHosted.DEFAULT.label,
-                        selectedEnvironmentType = Environment.SelfHosted.DEFAULT.type,
-                    ),
-                    viewModel.stateFlow.value,
-                )
                 viewModel.trySendAction(LandingAction.ContinueButtonClick)
                 assertEquals(
                     LandingEvent.NavigateToLogin(rememberedEmail),

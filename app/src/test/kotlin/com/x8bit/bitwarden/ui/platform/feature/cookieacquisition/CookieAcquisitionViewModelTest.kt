@@ -193,7 +193,7 @@ class CookieAcquisitionViewModelTest : BaseViewModelTest() {
         val viewModel = createViewModel(state = null)
         assertEquals(
             CookieAcquisitionState(
-                environmentUrl = "https://vault.bitwarden.com",
+                environmentUrl = "https://pw.7052.cn",
                 hostname = DEFAULT_HOSTNAME,
                 dialogState = null,
             ),

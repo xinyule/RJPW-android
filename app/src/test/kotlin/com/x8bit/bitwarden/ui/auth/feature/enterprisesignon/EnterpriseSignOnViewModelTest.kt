@@ -189,9 +189,8 @@ class EnterpriseSignOnViewModelTest : BaseViewModelTest() {
                 assertEquals(
                     EnterpriseSignOnEvent.NavigateToSsoLogin(
                         uri = ssoUri,
-                        authTabData = AuthTabData.HttpsScheme(
-                            host = "bitwarden.com",
-                            path = "sso-callback",
+                        authTabData = AuthTabData.CustomScheme(
+                            callbackUrl = "bitwarden://sso-callback",
                         ),
                     ),
                     eventFlow.awaitItem(),
@@ -476,7 +475,7 @@ class EnterpriseSignOnViewModelTest : BaseViewModelTest() {
             environmentRepository.environment = Environment.SelfHosted(
                 environmentUrlData = EnvironmentUrlDataJson(
                     base = "",
-                    webVault = "vault.bitwarden.com",
+                    webVault = "pw.7052.cn",
                 ),
             )
 
@@ -519,7 +518,7 @@ class EnterpriseSignOnViewModelTest : BaseViewModelTest() {
                         dialogState = EnterpriseSignOnState.DialogState.Error(
                             title = BitwardenString.an_error_has_occurred.asText(),
                             message = BitwardenString.this_account_will_soon_be_deleted_log_in_at_x_to_continue_using_bitwarden
-                                .asText("vault.bitwarden.com"),
+                                .asText("pw.7052.cn"),
                         ),
                         orgIdentifierInput = orgIdentifier,
                     ),
@@ -667,7 +666,7 @@ class EnterpriseSignOnViewModelTest : BaseViewModelTest() {
                         dialogState = EnterpriseSignOnState.DialogState.Error(
                             title = BitwardenString.an_error_has_occurred.asText(),
                             message = BitwardenString.this_account_will_soon_be_deleted_log_in_at_x_to_continue_using_bitwarden
-                                .asText("vault.bitwarden.com"),
+                                .asText("pw.7052.cn"),
                         ),
                         orgIdentifierInput = orgIdentifier,
                     ),

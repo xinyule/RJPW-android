@@ -2165,7 +2165,7 @@ class AddEditSendViewModelTest : BaseViewModelTest() {
                 viewModel.trySendAction(AddEditSendAction.UpgradeToPremiumClick)
                 assertEquals(
                     AddEditSendEvent.NavigateToPremium(
-                        uri = "https://vault.bitwarden.com/#/settings/subscription/premium?callToAction=upgradeToPremium",
+                        uri = "https://pw.7052.cn/#/settings/subscription/premium?callToAction=upgradeToPremium",
                     ),
                     awaitItem(),
                 )
@@ -2242,7 +2242,7 @@ private val DEFAULT_VIEW_STATE = AddEditSendState.ViewState.Content(
     selectedType = DEFAULT_SELECTED_TYPE_STATE,
 )
 
-private const val DEFAULT_ENVIRONMENT_URL = "https://send.bitwarden.com/#"
+private const val DEFAULT_ENVIRONMENT_URL = "https://pw.7052.cn/#/send/"
 
 private val DEFAULT_STATE = AddEditSendState(
     addEditSendType = AddEditSendType.AddItem,

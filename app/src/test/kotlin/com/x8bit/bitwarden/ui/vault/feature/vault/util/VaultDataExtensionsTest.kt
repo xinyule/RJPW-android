@@ -721,7 +721,7 @@ class VaultDataExtensionsTest {
                 )
 
         val expected = IconData.Network(
-            uri = "https://icons.bitwarden.net/www.mockuri1.com/icon.png",
+            uri = "https://pw.7052.cn/icons/www.mockuri1.com/icon.png",
             fallbackIconRes = BitwardenDrawable.ic_globe,
         )
 
@@ -752,7 +752,7 @@ class VaultDataExtensionsTest {
                 )
 
         val expected = IconData.Network(
-            uri = "https://icons.bitwarden.net/www.mockuri1.com/icon.png",
+            uri = "https://pw.7052.cn/icons/www.mockuri1.com/icon.png",
             fallbackIconRes = BitwardenDrawable.ic_bw_passkey,
         )
 
@@ -980,7 +980,7 @@ class VaultDataExtensionsTest {
                         id = "mockId-1",
                         name = mockCipher.name.asText(),
                         startIcon = IconData.Network(
-                            uri = "https://icons.bitwarden.net/www.mockuri1.com/icon.png",
+                            uri = "https://pw.7052.cn/icons/www.mockuri1.com/icon.png",
                             fallbackIconRes = BitwardenDrawable.ic_globe,
                         ),
                         startIconTestTag = "LoginCipherIcon",

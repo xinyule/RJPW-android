@@ -375,12 +375,12 @@ class LandingScreenTest : BitwardenComposeTest() {
 
         // Clicking to open dialog
         composeTestRule
-            .onNodeWithText(Environment.SelfHosted.DEFAULT.label)
+            .onNodeWithText("Self-hosted")
             .performClick()
 
         // Clicking item on dialog
         composeTestRule
-            .onNodeWithText(selectedEnvironment.label)
+            .onNodeWithText("Self-hosted")
             .assert(hasAnyAncestor(isDialog()))
             .performClick()
 
@@ -519,7 +519,7 @@ private val ACTIVE_ACCOUNT_SUMMARY = AccountSummary(
     name = "Active User",
     email = "active@bitwarden.com",
     avatarColorHex = "#aa00aa",
-    environmentLabel = "bitwarden.com",
+    environmentLabel = "pw.7052.cn",
     isActive = true,
     isLoggedIn = true,
     isVaultUnlocked = true,

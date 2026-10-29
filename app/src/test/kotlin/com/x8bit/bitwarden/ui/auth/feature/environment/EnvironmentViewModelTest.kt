@@ -257,7 +257,7 @@ class EnvironmentViewModelTest : BaseViewModelTest() {
                 assertEquals(
                     Environment.SelfHosted(
                         environmentUrlData = EnvironmentUrlDataJson(
-                            base = "",
+                            base = "https://pw.7052.cn",
                             api = null,
                             identity = null,
                             icon = null,
@@ -829,7 +829,7 @@ class EnvironmentViewModelTest : BaseViewModelTest() {
 }
 
 private val DEFAULT_STATE: EnvironmentState = EnvironmentState(
-    serverUrl = "",
+    serverUrl = "https://pw.7052.cn",
     keyAlias = "",
     webVaultServerUrl = "",
     apiServerUrl = "",

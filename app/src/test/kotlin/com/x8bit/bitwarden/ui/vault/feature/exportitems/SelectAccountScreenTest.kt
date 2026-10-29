@@ -146,7 +146,7 @@ class SelectAccountScreenTest : BitwardenComposeTest() {
             .assertIsDisplayed()
 
         val text = "You don’t have any accounts you can import from. Your organization’s " +
-            "security policy may restrict importing items from Bitwarden to another app."
+            "security policy may restrict importing items from RJPW to another app."
         composeTestRule
             .onNodeWithText(text = text)
             .assertIsDisplayed()
@@ -174,7 +174,7 @@ private val ACTIVE_ACCOUNT_SUMMARY = AccountSummary(
     name = "Active User",
     email = "active@bitwarden.com",
     avatarColorHex = "#aa00aa",
-    environmentLabel = "bitwarden.com",
+    environmentLabel = "pw.7052.cn",
     isActive = true,
     isLoggedIn = true,
     isVaultUnlocked = true,
@@ -184,7 +184,7 @@ private val LOCKED_ACCOUNT_SUMMARY = AccountSummary(
     name = "Locked User",
     email = "locked@bitwarden.com",
     avatarColorHex = "#00aaaa",
-    environmentLabel = "bitwarden.com",
+    environmentLabel = "pw.7052.cn",
     isActive = false,
     isLoggedIn = true,
     isVaultUnlocked = false,

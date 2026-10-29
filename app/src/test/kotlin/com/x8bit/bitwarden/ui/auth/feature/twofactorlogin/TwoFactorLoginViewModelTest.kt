@@ -430,9 +430,8 @@ class TwoFactorLoginViewModelTest : BaseViewModelTest() {
                 assertEquals(
                     TwoFactorLoginEvent.NavigateToDuo(
                         uri = mockkUri,
-                        authTabData = AuthTabData.HttpsScheme(
-                            host = "bitwarden.com",
-                            path = "duo-callback",
+                        authTabData = AuthTabData.CustomScheme(
+                            callbackUrl = "bitwarden://duo-callback",
                         ),
                     ),
                     awaitItem(),
@@ -519,9 +518,8 @@ class TwoFactorLoginViewModelTest : BaseViewModelTest() {
                 assertEquals(
                     TwoFactorLoginEvent.NavigateToWebAuth(
                         uri = mockkUri,
-                        authTabData = AuthTabData.HttpsScheme(
-                            host = "bitwarden.com",
-                            path = "webauthn-callback",
+                        authTabData = AuthTabData.CustomScheme(
+                            callbackUrl = "bitwarden://webauthn-callback",
                         ),
                     ),
                     awaitItem(),
@@ -977,7 +975,7 @@ class TwoFactorLoginViewModelTest : BaseViewModelTest() {
         runTest {
             val mockkUri = mockk<Uri>()
             every {
-                Uri.parse("https://vault.bitwarden.com/#/recover-2fa")
+                Uri.parse("https://pw.7052.cn/#/recover-2fa")
             } returns mockkUri
 
             val viewModel = createViewModel()
@@ -989,7 +987,7 @@ class TwoFactorLoginViewModelTest : BaseViewModelTest() {
                 )
                 assertEquals(
                     TwoFactorLoginEvent.NavigateToRecoveryCode(
-                        uri = "https://vault.bitwarden.com/#/recover-2fa".toUri(),
+                        uri = "https://pw.7052.cn/#/recover-2fa".toUri(),
                     ),
                     awaitItem(),
                 )
