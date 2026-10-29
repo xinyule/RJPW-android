@@ -84,7 +84,7 @@ class VaultDataExtensionsTest {
         val actual = vaultData.toViewState(
             isPremium = true,
             isIconLoadingDisabled = false,
-            baseIconUrl = Environment.Prod.Us.baseIconUrl,
+            baseIconUrl = Environment.SelfHosted.DEFAULT.baseIconUrl,
             vaultFilterType = VaultFilterType.AllVaults,
             hasMasterPassword = true,
             restrictItemTypesPolicyOrgIds = emptyList(),
@@ -179,7 +179,7 @@ class VaultDataExtensionsTest {
         val actual = vaultData.toViewState(
             isPremium = true,
             isIconLoadingDisabled = false,
-            baseIconUrl = Environment.Prod.Us.baseIconUrl,
+            baseIconUrl = Environment.SelfHosted.DEFAULT.baseIconUrl,
             vaultFilterType = VaultFilterType.MyVault,
             hasMasterPassword = true,
             restrictItemTypesPolicyOrgIds = emptyList(),
@@ -247,7 +247,7 @@ class VaultDataExtensionsTest {
         val actual = vaultData.toViewState(
             isPremium = true,
             isIconLoadingDisabled = false,
-            baseIconUrl = Environment.Prod.Us.baseIconUrl,
+            baseIconUrl = Environment.SelfHosted.DEFAULT.baseIconUrl,
             vaultFilterType = VaultFilterType.OrganizationVault(
                 organizationId = "mockOrganizationId-1",
                 organizationName = "Mock Organization 1",
@@ -319,7 +319,7 @@ class VaultDataExtensionsTest {
         val actual = vaultData.toViewState(
             isPremium = true,
             isIconLoadingDisabled = false,
-            baseIconUrl = Environment.Prod.Us.baseIconUrl,
+            baseIconUrl = Environment.SelfHosted.DEFAULT.baseIconUrl,
             vaultFilterType = VaultFilterType.AllVaults,
             hasMasterPassword = true,
             restrictItemTypesPolicyOrgIds = emptyList(),
@@ -348,7 +348,7 @@ class VaultDataExtensionsTest {
         val actual = vaultData.toViewState(
             isPremium = true,
             isIconLoadingDisabled = false,
-            baseIconUrl = Environment.Prod.Us.baseIconUrl,
+            baseIconUrl = Environment.SelfHosted.DEFAULT.baseIconUrl,
             vaultFilterType = VaultFilterType.AllVaults,
             hasMasterPassword = true,
             restrictItemTypesPolicyOrgIds = emptyList(),
@@ -378,7 +378,7 @@ class VaultDataExtensionsTest {
         val actual = vaultData.toViewState(
             isPremium = true,
             isIconLoadingDisabled = false,
-            baseIconUrl = Environment.Prod.Us.baseIconUrl,
+            baseIconUrl = Environment.SelfHosted.DEFAULT.baseIconUrl,
             vaultFilterType = VaultFilterType.AllVaults,
             hasMasterPassword = true,
             restrictItemTypesPolicyOrgIds = emptyList(),
@@ -432,7 +432,7 @@ class VaultDataExtensionsTest {
             isPremium = false,
             vaultFilterType = VaultFilterType.AllVaults,
             isIconLoadingDisabled = false,
-            baseIconUrl = Environment.Prod.Us.baseIconUrl,
+            baseIconUrl = Environment.SelfHosted.DEFAULT.baseIconUrl,
             hasMasterPassword = true,
             restrictItemTypesPolicyOrgIds = emptyList(),
             validTotpIds = emptySet(),
@@ -487,7 +487,7 @@ class VaultDataExtensionsTest {
             isPremium = false,
             vaultFilterType = VaultFilterType.AllVaults,
             isIconLoadingDisabled = false,
-            baseIconUrl = Environment.Prod.Us.baseIconUrl,
+            baseIconUrl = Environment.SelfHosted.DEFAULT.baseIconUrl,
             hasMasterPassword = true,
             restrictItemTypesPolicyOrgIds = emptyList(),
             validTotpIds = setOf("mockId-1"),
@@ -542,7 +542,7 @@ class VaultDataExtensionsTest {
             isPremium = false,
             vaultFilterType = VaultFilterType.AllVaults,
             isIconLoadingDisabled = false,
-            baseIconUrl = Environment.Prod.Us.baseIconUrl,
+            baseIconUrl = Environment.SelfHosted.DEFAULT.baseIconUrl,
             hasMasterPassword = true,
             restrictItemTypesPolicyOrgIds = emptyList(),
             validTotpIds = setOf("mockId-1"),
@@ -589,7 +589,7 @@ class VaultDataExtensionsTest {
                 ?.uris
                 .toLoginIconData(
                     isIconLoadingDisabled = true,
-                    baseIconUrl = Environment.Prod.Us.baseIconUrl,
+                    baseIconUrl = Environment.SelfHosted.DEFAULT.baseIconUrl,
                     usePasskeyDefaultIcon = false,
                 )
 
@@ -610,7 +610,7 @@ class VaultDataExtensionsTest {
                 ?.uris
                 .toLoginIconData(
                     isIconLoadingDisabled = true,
-                    baseIconUrl = Environment.Prod.Us.baseIconUrl,
+                    baseIconUrl = Environment.SelfHosted.DEFAULT.baseIconUrl,
                     usePasskeyDefaultIcon = true,
                 )
 
@@ -630,7 +630,7 @@ class VaultDataExtensionsTest {
         )
             .toLoginIconData(
                 isIconLoadingDisabled = false,
-                baseIconUrl = Environment.Prod.Us.baseIconUrl,
+                baseIconUrl = Environment.SelfHosted.DEFAULT.baseIconUrl,
                 usePasskeyDefaultIcon = false,
             )
 
@@ -651,7 +651,7 @@ class VaultDataExtensionsTest {
         )
             .toLoginIconData(
                 isIconLoadingDisabled = false,
-                baseIconUrl = Environment.Prod.Us.baseIconUrl,
+                baseIconUrl = Environment.SelfHosted.DEFAULT.baseIconUrl,
                 usePasskeyDefaultIcon = true,
             )
 
@@ -671,7 +671,7 @@ class VaultDataExtensionsTest {
         )
             .toLoginIconData(
                 isIconLoadingDisabled = false,
-                baseIconUrl = Environment.Prod.Us.baseIconUrl,
+                baseIconUrl = Environment.SelfHosted.DEFAULT.baseIconUrl,
                 usePasskeyDefaultIcon = false,
             )
 
@@ -691,7 +691,7 @@ class VaultDataExtensionsTest {
         )
             .toLoginIconData(
                 isIconLoadingDisabled = false,
-                baseIconUrl = Environment.Prod.Us.baseIconUrl,
+                baseIconUrl = Environment.SelfHosted.DEFAULT.baseIconUrl,
                 usePasskeyDefaultIcon = false,
             )
 
@@ -716,7 +716,7 @@ class VaultDataExtensionsTest {
                 ?.uris
                 .toLoginIconData(
                     isIconLoadingDisabled = false,
-                    baseIconUrl = Environment.Prod.Us.baseIconUrl,
+                    baseIconUrl = Environment.SelfHosted.DEFAULT.baseIconUrl,
                     usePasskeyDefaultIcon = false,
                 )
 
@@ -747,7 +747,7 @@ class VaultDataExtensionsTest {
                 ?.uris
                 .toLoginIconData(
                     isIconLoadingDisabled = false,
-                    baseIconUrl = Environment.Prod.Us.baseIconUrl,
+                    baseIconUrl = Environment.SelfHosted.DEFAULT.baseIconUrl,
                     usePasskeyDefaultIcon = true,
                 )
 
@@ -780,7 +780,7 @@ class VaultDataExtensionsTest {
         val actual = vaultData.toViewState(
             isPremium = true,
             isIconLoadingDisabled = false,
-            baseIconUrl = Environment.Prod.Us.baseIconUrl,
+            baseIconUrl = Environment.SelfHosted.DEFAULT.baseIconUrl,
             vaultFilterType = VaultFilterType.AllVaults,
             hasMasterPassword = true,
             restrictItemTypesPolicyOrgIds = emptyList(),
@@ -835,7 +835,7 @@ class VaultDataExtensionsTest {
         val actual = vaultData.toViewState(
             isPremium = true,
             isIconLoadingDisabled = false,
-            baseIconUrl = Environment.Prod.Us.baseIconUrl,
+            baseIconUrl = Environment.SelfHosted.DEFAULT.baseIconUrl,
             vaultFilterType = VaultFilterType.AllVaults,
             hasMasterPassword = true,
             restrictItemTypesPolicyOrgIds = emptyList(),
@@ -893,7 +893,7 @@ class VaultDataExtensionsTest {
         val actual = vaultData.toViewState(
             isPremium = true,
             isIconLoadingDisabled = false,
-            baseIconUrl = Environment.Prod.Us.baseIconUrl,
+            baseIconUrl = Environment.SelfHosted.DEFAULT.baseIconUrl,
             vaultFilterType = VaultFilterType.AllVaults,
             hasMasterPassword = true,
             restrictItemTypesPolicyOrgIds = emptyList(),
@@ -958,7 +958,7 @@ class VaultDataExtensionsTest {
         val actual = vaultData.toViewState(
             isPremium = true,
             isIconLoadingDisabled = false,
-            baseIconUrl = Environment.Prod.Us.baseIconUrl,
+            baseIconUrl = Environment.SelfHosted.DEFAULT.baseIconUrl,
             vaultFilterType = VaultFilterType.AllVaults,
             hasMasterPassword = true,
             restrictItemTypesPolicyOrgIds = emptyList(),
@@ -1041,7 +1041,7 @@ class VaultDataExtensionsTest {
         val actual = vaultData.toViewState(
             isPremium = true,
             isIconLoadingDisabled = false,
-            baseIconUrl = Environment.Prod.Us.baseIconUrl,
+            baseIconUrl = Environment.SelfHosted.DEFAULT.baseIconUrl,
             vaultFilterType = VaultFilterType.AllVaults,
             hasMasterPassword = true,
             restrictItemTypesPolicyOrgIds = emptyList(),
@@ -1146,7 +1146,7 @@ class VaultDataExtensionsTest {
         val actual = vaultData.toViewState(
             isPremium = true,
             isIconLoadingDisabled = false,
-            baseIconUrl = Environment.Prod.Us.baseIconUrl,
+            baseIconUrl = Environment.SelfHosted.DEFAULT.baseIconUrl,
             vaultFilterType = VaultFilterType.AllVaults,
             hasMasterPassword = true,
             restrictItemTypesPolicyOrgIds = listOf("restrict_item_type_policy_id"),
@@ -1215,7 +1215,7 @@ class VaultDataExtensionsTest {
         val actual = vaultData.toViewState(
             isPremium = true,
             isIconLoadingDisabled = false,
-            baseIconUrl = Environment.Prod.Us.baseIconUrl,
+            baseIconUrl = Environment.SelfHosted.DEFAULT.baseIconUrl,
             vaultFilterType = VaultFilterType.AllVaults,
             hasMasterPassword = true,
             restrictItemTypesPolicyOrgIds = listOf("restrict_item_type_policy_id"),
@@ -1270,7 +1270,7 @@ class VaultDataExtensionsTest {
         val actual = vaultData.toViewState(
             isPremium = true,
             isIconLoadingDisabled = false,
-            baseIconUrl = Environment.Prod.Us.baseIconUrl,
+            baseIconUrl = Environment.SelfHosted.DEFAULT.baseIconUrl,
             vaultFilterType = VaultFilterType.AllVaults,
             hasMasterPassword = true,
             restrictItemTypesPolicyOrgIds = emptyList(),
@@ -1341,7 +1341,7 @@ class VaultDataExtensionsTest {
         val actual = vaultData.toViewState(
             isPremium = true,
             isIconLoadingDisabled = false,
-            baseIconUrl = Environment.Prod.Us.baseIconUrl,
+            baseIconUrl = Environment.SelfHosted.DEFAULT.baseIconUrl,
             vaultFilterType = VaultFilterType.AllVaults,
             hasMasterPassword = true,
             restrictItemTypesPolicyOrgIds = emptyList(),
@@ -1431,7 +1431,7 @@ class VaultDataExtensionsTest {
         val actual = vaultData.toViewState(
             isPremium = true,
             isIconLoadingDisabled = false,
-            baseIconUrl = Environment.Prod.Us.baseIconUrl,
+            baseIconUrl = Environment.SelfHosted.DEFAULT.baseIconUrl,
             vaultFilterType = VaultFilterType.AllVaults,
             hasMasterPassword = true,
             restrictItemTypesPolicyOrgIds = emptyList(),
@@ -1506,7 +1506,7 @@ class VaultDataExtensionsTest {
         val actual = vaultData.toViewState(
             isPremium = true,
             isIconLoadingDisabled = false,
-            baseIconUrl = Environment.Prod.Us.baseIconUrl,
+            baseIconUrl = Environment.SelfHosted.DEFAULT.baseIconUrl,
             vaultFilterType = VaultFilterType.AllVaults,
             hasMasterPassword = true,
             restrictItemTypesPolicyOrgIds = emptyList(),
@@ -1581,7 +1581,7 @@ class VaultDataExtensionsTest {
         val actual = vaultData.toViewState(
             isPremium = true,
             isIconLoadingDisabled = false,
-            baseIconUrl = Environment.Prod.Us.baseIconUrl,
+            baseIconUrl = Environment.SelfHosted.DEFAULT.baseIconUrl,
             vaultFilterType = VaultFilterType.AllVaults,
             hasMasterPassword = true,
             restrictItemTypesPolicyOrgIds = emptyList(),

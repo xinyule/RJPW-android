@@ -100,7 +100,7 @@ class SsoUtilsTest : BaseRobolectricTest() {
             every { data?.getQueryParameter("code") } returns null
             every { action } returns Intent.ACTION_VIEW
             every { data?.scheme } returns "https"
-            every { data?.host } returns "bitwarden.eu"
+            every { data?.host } returns "pw.7052.cn"
             every { data?.path } returns "/sso-callback"
         }
         val result = intent.getSsoCallbackResult()
@@ -115,7 +115,7 @@ class SsoUtilsTest : BaseRobolectricTest() {
             every { data?.getQueryParameter("state") } returns "myState"
             every { action } returns Intent.ACTION_VIEW
             every { data?.scheme } returns "https"
-            every { data?.host } returns "bitwarden.com"
+            every { data?.host } returns "pw.7052.cn"
             every { data?.path } returns "/sso-callback"
         }
         val result = intent.getSsoCallbackResult()

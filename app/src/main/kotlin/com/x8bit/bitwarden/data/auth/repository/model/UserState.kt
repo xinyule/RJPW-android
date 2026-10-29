@@ -117,7 +117,7 @@ data class UserState(
             name = null,
             email = "",
             avatarColorHex = "".toHexColorRepresentation(),
-            environment = Environment.Prod.Us,
+            environment = Environment.SelfHosted.DEFAULT,
             isPremium = false,
             isPremiumFromSelf = false,
             isLoggedIn = false,

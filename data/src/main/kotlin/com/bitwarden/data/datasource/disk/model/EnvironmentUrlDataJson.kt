@@ -47,8 +47,7 @@ data class EnvironmentUrlDataJson(
     val isFedRamp: Boolean
         get() = base.contains(other = BITWARDEN_FED_RAMP_DEV_BASE_URL) ||
             base.contains(other = GAME_WARDEN_FED_RAMP_DEV_BASE_URL) ||
-            base.contains(other = GAME_WARDEN_FED_RAMP_STAGING_BASE_URL) ||
-            base.contains(other = BITWARDEN_FED_RAMP_PROD_DOMAIN)
+            base.contains(other = GAME_WARDEN_FED_RAMP_STAGING_BASE_URL)
 
     /**
      * Indicates if this is an internal environment.
@@ -61,11 +60,6 @@ data class EnvironmentUrlDataJson(
          * The domain used for internal Bitwarden environments.
          */
         private const val BITWARDEN_INTERNAL_DOMAIN: String = "bitwarden.pw"
-
-        /**
-         * The domain used for production Bitwarden FedRAMP Bitwarden environments.
-         */
-        private const val BITWARDEN_FED_RAMP_PROD_DOMAIN: String = "bitwarden-gov.com"
 
         /**
          * The base URL used for the Bitwarden FedRAMP development environments.
@@ -84,51 +78,10 @@ data class EnvironmentUrlDataJson(
         private const val GAME_WARDEN_FED_RAMP_STAGING_BASE_URL: String = "gw.stg.bitwarden.pw"
 
         /**
-         * Default [EnvironmentUrlDataJson] for the US region.
+         * The default [EnvironmentUrlDataJson]: the user's own self-hosted Vaultwarden
+         * server. All sub-URLs (api, identity, icons, ...) are derived from this base.
          */
-        val DEFAULT_US: EnvironmentUrlDataJson =
-            EnvironmentUrlDataJson(base = "https://vault.bitwarden.com")
-
-        /**
-         * Default [EnvironmentUrlDataJson] for the US region as written to disk by the legacy
-         * Xamarin app.
-         */
-        val DEFAULT_LEGACY_US: EnvironmentUrlDataJson = EnvironmentUrlDataJson(
-            base = "https://vault.bitwarden.com",
-            keyUri = null,
-            api = "https://api.bitwarden.com",
-            identity = "https://identity.bitwarden.com",
-            icon = "https://icons.bitwarden.net",
-            notifications = "https://notifications.bitwarden.com",
-            webVault = "https://vault.bitwarden.com",
-            events = "https://events.bitwarden.com",
-        )
-
-        /**
-         * Default [EnvironmentUrlDataJson] for the EU region.
-         */
-        val DEFAULT_EU: EnvironmentUrlDataJson =
-            EnvironmentUrlDataJson(base = "https://vault.bitwarden.eu")
-
-        /**
-         * Default [EnvironmentUrlDataJson] for the EU region as written to disk by the legacy
-         * Xamarin app.
-         */
-        val DEFAULT_LEGACY_EU: EnvironmentUrlDataJson = EnvironmentUrlDataJson(
-            base = "https://vault.bitwarden.eu",
-            keyUri = null,
-            api = "https://api.bitwarden.eu",
-            identity = "https://identity.bitwarden.eu",
-            icon = "https://icons.bitwarden.eu",
-            notifications = "https://notifications.bitwarden.eu",
-            webVault = "https://vault.bitwarden.eu",
-            events = "https://events.bitwarden.eu",
-        )
-
-        /**
-         * Default [EnvironmentUrlDataJson] for the FedRAMP environment.
-         */
-        val DEFAULT_FED_RAMP: EnvironmentUrlDataJson =
-            EnvironmentUrlDataJson(base = "https://vault.bitwarden-gov.com")
+        val DEFAULT: EnvironmentUrlDataJson =
+            EnvironmentUrlDataJson(base = "https://pw.7052.cn")
     }
 }

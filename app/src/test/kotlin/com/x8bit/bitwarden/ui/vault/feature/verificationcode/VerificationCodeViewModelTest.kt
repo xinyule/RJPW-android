@@ -58,7 +58,7 @@ class VerificationCodeViewModelTest : BaseViewModelTest() {
     }
 
     private val environmentRepository: EnvironmentRepository = mockk {
-        every { environment } returns Environment.Prod.Us
+        every { environment } returns Environment.SelfHosted.DEFAULT
         every { environmentStateFlow } returns mockk()
     }
 

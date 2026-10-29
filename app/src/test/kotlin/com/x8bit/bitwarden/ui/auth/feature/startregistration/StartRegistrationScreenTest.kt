@@ -205,11 +205,11 @@ class StartRegistrationScreenTest : BitwardenComposeTest() {
 
     @Test
     fun `when environment selected in dialog should send EnvironmentTypeSelect action`() {
-        val selectedEnvironment = Environment.Prod.Eu
+        val selectedEnvironment = Environment.SelfHosted.DEFAULT
 
         // Clicking to open dialog
         composeTestRule
-            .onNodeWithText(Environment.Prod.Us.label)
+            .onNodeWithText(Environment.SelfHosted.DEFAULT.label)
             .performScrollTo()
             .performClick()
 
@@ -283,6 +283,6 @@ private val DEFAULT_STATE: StartRegistrationState = StartRegistrationState(
     nameInput = "",
     isReceiveMarketingEmailsToggled = false,
     isContinueButtonEnabled = false,
-    selectedEnvironmentType = Environment.Type.US,
+    selectedEnvironmentType = Environment.Type.SELF_HOSTED,
     dialog = null,
 )

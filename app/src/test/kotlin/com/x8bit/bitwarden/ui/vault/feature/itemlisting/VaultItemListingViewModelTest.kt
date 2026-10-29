@@ -200,7 +200,7 @@ class VaultItemListingViewModelTest : BaseViewModelTest() {
         coEvery { getCipher(any()) } returns GetCipherResult.Success(createMockCipherView(1))
     }
     private val environmentRepository: EnvironmentRepository = mockk {
-        every { environment } returns Environment.Prod.Us
+        every { environment } returns Environment.SelfHosted.DEFAULT
         every { environmentStateFlow } returns mockk()
     }
 
@@ -6844,7 +6844,7 @@ class VaultItemListingViewModelTest : BaseViewModelTest() {
             accountSummaries = DEFAULT_USER_STATE.toAccountSummaries(),
             viewState = viewState,
             vaultFilterType = vaultRepository.vaultFilterType,
-            baseWebSendUrl = Environment.Prod.Us.baseWebSendUrl,
+            baseWebSendUrl = Environment.SelfHosted.DEFAULT.baseWebSendUrl,
             baseIconUrl = environmentRepository.environment.baseIconUrl,
             isIconLoadingDisabled = settingsRepository.isIconLoadingDisabled,
             isPullToRefreshSettingEnabled = false,
@@ -6865,7 +6865,7 @@ private val DEFAULT_ACCOUNT = UserState.Account(
     userId = "activeUserId",
     name = "Active User",
     email = "active@bitwarden.com",
-    environment = Environment.Prod.Us,
+    environment = Environment.SelfHosted.DEFAULT,
     avatarColorHex = "#aa00aa",
     isPremium = true,
     isPremiumFromSelf = true,

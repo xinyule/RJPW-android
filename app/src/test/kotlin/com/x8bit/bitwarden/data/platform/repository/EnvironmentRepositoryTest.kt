@@ -48,7 +48,7 @@ class EnvironmentRepositoryTest {
     @Test
     fun `after initialize changes to the active user should update the environment if necessary`() {
         assertEquals(
-            Environment.Prod.Us,
+            Environment.SelfHosted.DEFAULT,
             repository.environment,
         )
         assertEquals(
@@ -61,14 +61,14 @@ class EnvironmentRepositoryTest {
         // Updating the environment for the active user to a non-null value triggers an update
         // in the saved environment.
         fakeAuthDiskSource.userState = getMockUserState(
-            environmentForActiveUser = EnvironmentUrlDataJson.DEFAULT_EU,
+            environmentForActiveUser = EnvironmentUrlDataJson.DEFAULT,
         )
         assertEquals(
-            Environment.Prod.Eu,
+            Environment.SelfHosted.DEFAULT,
             repository.environment,
         )
         assertEquals(
-            EnvironmentUrlDataJson.DEFAULT_EU,
+            EnvironmentUrlDataJson.DEFAULT,
             fakeEnvironmentDiskSource.preAuthEnvironmentUrlData,
         )
 
@@ -78,11 +78,11 @@ class EnvironmentRepositoryTest {
             environmentForActiveUser = null,
         )
         assertEquals(
-            Environment.Prod.Eu,
+            Environment.SelfHosted.DEFAULT,
             repository.environment,
         )
         assertEquals(
-            EnvironmentUrlDataJson.DEFAULT_EU,
+            EnvironmentUrlDataJson.DEFAULT,
             fakeEnvironmentDiskSource.preAuthEnvironmentUrlData,
         )
     }
@@ -98,7 +98,7 @@ class EnvironmentRepositoryTest {
         // The repository exposes a non-null default value when the disk source is empty
         assertNull(fakeEnvironmentDiskSource.preAuthEnvironmentUrlData)
         assertEquals(
-            Environment.Prod.Us,
+            Environment.SelfHosted.DEFAULT,
             repository.environment,
         )
 
@@ -112,7 +112,7 @@ class EnvironmentRepositoryTest {
         // Updating the disk source updates the repository
         fakeEnvironmentDiskSource.preAuthEnvironmentUrlData = null
         assertEquals(
-            Environment.Prod.Us,
+            Environment.SelfHosted.DEFAULT,
             repository.environment,
         )
         fakeEnvironmentDiskSource.preAuthEnvironmentUrlData = environmentUrlDataJson
@@ -127,18 +127,18 @@ class EnvironmentRepositoryTest {
         val environmentUrlDataJson = mockk<EnvironmentUrlDataJson>()
         val environment = mockk<Environment> {
             every { environmentUrlData } returns environmentUrlDataJson
-            every { type } returns Environment.Type.US
+            every { type } returns Environment.Type.SELF_HOSTED
         }
         every { environmentUrlDataJson.toEnvironmentUrls() } returns environment
 
         repository.environmentStateFlow.test {
             // The initial values of the Flow and the property are in sync
             assertEquals(
-                Environment.Prod.Us,
+                Environment.SelfHosted.DEFAULT,
                 repository.environment,
             )
             assertEquals(
-                Environment.Prod.Us,
+                Environment.SelfHosted.DEFAULT,
                 awaitItem(),
             )
 
@@ -183,7 +183,7 @@ class EnvironmentRepositoryTest {
         }
         every { environmentUrlDataJson.toEnvironmentUrls() } returns environment
 
-        repository.environment = Environment.Prod.Eu
+        repository.environment = Environment.SelfHosted.DEFAULT
         fakeEnvironmentDiskSource.storePreAuthEnvironmentUrlDataForEmail(
             userEmail = EMAIL,
             environmentUrlDataJson,
@@ -192,7 +192,7 @@ class EnvironmentRepositoryTest {
         repository.saveCurrentEnvironmentForEmail(userEmail = EMAIL)
 
         assertEquals(
-            Environment.Prod.Eu.environmentUrlData,
+            Environment.SelfHosted.DEFAULT.environmentUrlData,
             fakeEnvironmentDiskSource
                 .getPreAuthEnvironmentUrlDataForEmail(
                     userEmail = EMAIL,

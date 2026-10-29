@@ -92,7 +92,7 @@ private fun createMockUserState(hasOrganizations: Boolean = true): UserState =
                 name = "Active User",
                 email = "active@bitwarden.com",
                 avatarColorHex = "#aa00aa",
-                environment = Environment.Prod.Us,
+                environment = Environment.SelfHosted.DEFAULT,
                 isPremium = true,
                 isPremiumFromSelf = true,
                 isLoggedIn = true,

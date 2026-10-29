@@ -304,7 +304,7 @@ private val DEFAULT_ACCOUNT = AccountJson(
         creationDate = Instant.parse("2024-09-13T01:00:00.00Z"),
     ),
     settings = AccountJson.Settings(
-        environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+        environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
     ),
 )
 
@@ -329,7 +329,7 @@ private val UPDATED_ACCOUNT = AccountJson(
         creationDate = Instant.parse("2024-09-13T01:00:00.00Z"),
     ),
     settings = AccountJson.Settings(
-        environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+        environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
     ),
 )
 

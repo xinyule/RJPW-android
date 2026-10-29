@@ -31,7 +31,7 @@ class NetworkConfigManagerTest {
     )
     private val mutableAuthStateFlow = MutableStateFlow<AuthState>(AuthState.Uninitialized)
     private val mutableUserStateFlow = MutableStateFlow<UserState?>(null)
-    private val mutableEnvironmentStateFlow = MutableStateFlow<Environment>(Environment.Prod.Us)
+    private val mutableEnvironmentStateFlow = MutableStateFlow<Environment>(Environment.SelfHosted.DEFAULT)
 
     private val authRepository: AuthRepository = mockk {
         every { authStateFlow } returns mutableAuthStateFlow
@@ -63,9 +63,9 @@ class NetworkConfigManagerTest {
     @Suppress("MaxLineLength")
     @Test
     fun `changes in the Environment or active user ID should call getServerConfig after debounce period`() {
-        mutableEnvironmentStateFlow.value = Environment.Prod.Eu
+        mutableEnvironmentStateFlow.value = Environment.SelfHosted.DEFAULT
         mutableUserStateFlow.value = mockk { every { activeUserId } returns "userId" }
-        mutableEnvironmentStateFlow.value = Environment.Prod.Us
+        mutableEnvironmentStateFlow.value = Environment.SelfHosted.DEFAULT
         mutableUserStateFlow.value = null
         testDispatcher.advanceTimeByAndRunCurrent(delayTimeMillis = 500L)
         coVerify(exactly = 1) {

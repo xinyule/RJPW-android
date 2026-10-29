@@ -89,7 +89,7 @@ class AddEditSendViewModelTest : BaseViewModelTest() {
         every { generatorResultFlow } returns mutableGeneratorResultFlow
     }
     private val environmentRepository: EnvironmentRepository = mockk {
-        every { environment } returns Environment.Prod.Us
+        every { environment } returns Environment.SelfHosted.DEFAULT
     }
     private val specialCircumstanceManager: SpecialCircumstanceManager = mockk {
         every { specialCircumstance } returns null
@@ -2367,7 +2367,7 @@ private val DEFAULT_ACCOUNT = UserState.Account(
     userId = "activeUserId",
     name = "Active User",
     email = "active@bitwarden.com",
-    environment = Environment.Prod.Us,
+    environment = Environment.SelfHosted.DEFAULT,
     avatarColorHex = "#aa00aa",
     isPremium = true,
     isPremiumFromSelf = true,

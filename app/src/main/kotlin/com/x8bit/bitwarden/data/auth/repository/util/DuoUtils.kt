@@ -6,10 +6,7 @@ import androidx.browser.auth.AuthTabIntent
 import com.bitwarden.annotation.OmitFromCoverage
 
 private val BITWARDEN_HOSTS: List<String> = listOf(
-    "bitwarden.com",
-    "bitwarden.eu",
-    "bitwarden.pw",
-    "bitwarden-gov.com",
+    "pw.7052.cn",
 )
 private const val APP_LINK_SCHEME: String = "https"
 private const val DEEPLINK_SCHEME: String = "bitwarden"

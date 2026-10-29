@@ -94,7 +94,7 @@ class WebAuthUtilsTest : BaseRobolectricTest() {
             every { data?.getQueryParameter("error") } returns message
             every { action } returns Intent.ACTION_VIEW
             every { data?.scheme } returns "https"
-            every { data?.host } returns "bitwarden.com"
+            every { data?.host } returns "pw.7052.cn"
             every { data?.path } returns "/webauthn-callback"
         }
         val result = intent.getWebAuthResultOrNull()
@@ -108,7 +108,7 @@ class WebAuthUtilsTest : BaseRobolectricTest() {
             every { data?.getQueryParameter("data") } returns "myToken"
             every { action } returns Intent.ACTION_VIEW
             every { data?.scheme } returns "https"
-            every { data?.host } returns "bitwarden.eu"
+            every { data?.host } returns "pw.7052.cn"
             every { data?.path } returns "/webauthn-callback"
         }
         val result = intent.getWebAuthResultOrNull()

@@ -14,12 +14,6 @@ import com.x8bit.bitwarden.ui.auth.feature.accountsetup.navigateToSetupUnlockScr
 import com.x8bit.bitwarden.ui.auth.feature.accountsetup.setupAutoFillDestination
 import com.x8bit.bitwarden.ui.auth.feature.accountsetup.setupBrowserAutofillDestination
 import com.x8bit.bitwarden.ui.auth.feature.accountsetup.setupUnlockDestination
-import com.x8bit.bitwarden.ui.platform.feature.premium.plan.PlanMode
-import com.x8bit.bitwarden.ui.platform.feature.premium.plan.PlanRoute
-import com.x8bit.bitwarden.ui.platform.feature.premium.plan.navigateToPlanModal
-import com.x8bit.bitwarden.ui.platform.feature.premium.plan.planModalDestination
-import com.x8bit.bitwarden.ui.platform.feature.premium.upgraded.navigateToUpgradedToPremium
-import com.x8bit.bitwarden.ui.platform.feature.premium.upgraded.upgradedToPremiumDestination
 import com.x8bit.bitwarden.ui.platform.feature.search.SearchRoute
 import com.x8bit.bitwarden.ui.platform.feature.search.navigateToSearch
 import com.x8bit.bitwarden.ui.platform.feature.search.searchDestination
@@ -115,7 +109,7 @@ fun NavGraphBuilder.vaultUnlockedGraph(
                     parentFolderName = it,
                 )
             },
-            onNavigateToPlan = { navController.navigateToPlanModal() },
+            onNavigateToPlan = { /* no-op: the plan screen has been removed */ },
         )
         vaultUnlockedNavBarDestination(
             onNavigateToExportVault = { navController.navigateToExportVault() },
@@ -154,10 +148,8 @@ fun NavGraphBuilder.vaultUnlockedGraph(
             onNavigateToAboutPrivilegedApps = {
                 navController.navigateToAboutPrivilegedAppsScreen()
             },
-            onNavigateToPlan = { navController.navigateToPlanModal() },
-            onNavigateToUpgradedToPremium = {
-                navController.navigateToUpgradedToPremium(planMode = PlanMode.Standard)
-            },
+            onNavigateToPlan = { /* no-op: the plan screen has been removed */ },
+            onNavigateToUpgradedToPremium = { /* no-op */ },
         )
         flightRecorderDestination(
             isPreAuth = false,
@@ -207,7 +199,7 @@ fun NavGraphBuilder.vaultUnlockedGraph(
                     showOnlyCollections = showOnlyCollections,
                 )
             },
-            onNavigateToPlan = { navController.navigateToPlanModal() },
+            onNavigateToPlan = { /* no-op: the plan screen has been removed */ },
             onCloseAndNavigateToVaultItem = { cipherId, cipherType ->
                 navController.navigateToVaultItem(
                     args = VaultItemArgs(
@@ -238,7 +230,7 @@ fun NavGraphBuilder.vaultUnlockedGraph(
                 )
             },
             onNavigateToPreviewAttachment = { navController.navigateToPreviewAttachment(it) },
-            onNavigateToPlan = { navController.navigateToPlanModal() },
+            onNavigateToPlan = { /* no-op: the plan screen has been removed */ },
         )
         cardScanDestination(
             onNavigateBack = { navController.popBackStack() },
@@ -262,7 +254,7 @@ fun NavGraphBuilder.vaultUnlockedGraph(
             onNavigateBack = { navController.popBackStack() },
             onNavigateUpToSearchOrRoot = { navController.navigateUpToSearchOrVaultUnlockedRoot() },
             onNavigateToGeneratorModal = { navController.navigateToGeneratorModal(mode = it) },
-            onNavigateToPlan = { navController.navigateToPlanModal() },
+            onNavigateToPlan = { /* no-op: the plan screen has been removed */ },
         )
         viewSendDestination(
             onNavigateBack = { navController.popBackStack() },
@@ -290,12 +282,12 @@ fun NavGraphBuilder.vaultUnlockedGraph(
             onNavigateToViewSend = { navController.navigateToViewSend(it) },
             onNavigateToEditCipher = { navController.navigateToVaultAddEdit(it) },
             onNavigateToViewCipher = { navController.navigateToVaultItem(it) },
-            onNavigateToPlan = { navController.navigateToPlanModal() },
+            onNavigateToPlan = { /* no-op: the plan screen has been removed */ },
         )
         attachmentDestination(
             onNavigateBack = { navController.popBackStack() },
             onNavigateToPreviewAttachment = { navController.navigateToPreviewAttachment(it) },
-            onNavigateToPlan = { navController.navigateToPlanModal() },
+            onNavigateToPlan = { /* no-op: the plan screen has been removed */ },
         )
         setupUnlockDestination(
             onNavigateBack = {
@@ -314,20 +306,6 @@ fun NavGraphBuilder.vaultUnlockedGraph(
         )
         previewAttachmentDestination(
             onNavigateBack = { navController.popBackStack() },
-        )
-        planModalDestination(
-            onNavigateBack = { navController.popBackStack() },
-            onNavigateToUpgradedToPremium = {
-                navController.navigateToUpgradedToPremium(planMode = PlanMode.Modal)
-            },
-        )
-        upgradedToPremiumDestination(
-            onDismiss = { planMode ->
-                when (planMode) {
-                    PlanMode.Modal -> navController.popBackStack<PlanRoute.Modal>(inclusive = true)
-                    PlanMode.Standard -> navController.popBackStack()
-                }
-            },
         )
     }
 }

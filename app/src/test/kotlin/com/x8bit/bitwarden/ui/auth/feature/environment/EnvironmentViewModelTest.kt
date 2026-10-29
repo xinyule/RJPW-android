@@ -48,10 +48,10 @@ class EnvironmentViewModelTest : BaseViewModelTest() {
 
     @Suppress("MaxLineLength")
     @Test
-    fun `initial state should be correct when there is no saved state and the current environment is not self-hosted`() {
+    fun `initial state should be correct when there is no saved state and the current environment is the default`() {
         val viewModel = createViewModel()
         assertEquals(
-            DEFAULT_STATE,
+            DEFAULT_STATE.copy(serverUrl = "https://pw.7052.cn"),
             viewModel.stateFlow.value,
         )
     }
@@ -126,7 +126,7 @@ class EnvironmentViewModelTest : BaseViewModelTest() {
     @Test
     fun `SaveClick should show the error dialog when any URLs are invalid`() = runTest {
         assertEquals(
-            Environment.Prod.Us,
+            Environment.SelfHosted.DEFAULT,
             fakeEnvironmentRepository.environment,
         )
 
@@ -158,7 +158,7 @@ class EnvironmentViewModelTest : BaseViewModelTest() {
 
         // The Environment has not been updated
         assertEquals(
-            Environment.Prod.Us,
+            Environment.SelfHosted.DEFAULT,
             fakeEnvironmentRepository.environment,
         )
     }
@@ -168,7 +168,7 @@ class EnvironmentViewModelTest : BaseViewModelTest() {
     fun `SaveClick should emit NavigateBack, send a snackbar to the ENVIRONMENT SAVED relay, and update the environment when all URLs are valid`() =
         runTest {
             assertEquals(
-                Environment.Prod.Us,
+                Environment.SelfHosted.DEFAULT,
                 fakeEnvironmentRepository.environment,
             )
 
@@ -234,7 +234,7 @@ class EnvironmentViewModelTest : BaseViewModelTest() {
     fun `SaveClick should emit NavigateBack, send a snackbar to the ENVIRONMENT SAVED relay, and update the environment when some URLs are valid and others are null`() =
         runTest {
             assertEquals(
-                Environment.Prod.Us,
+                Environment.SelfHosted.DEFAULT,
                 fakeEnvironmentRepository.environment,
             )
 

@@ -11,25 +11,11 @@ class EnvironmentExtensionsTest {
     @Test
     fun `duoAuthTabData should return the correct AuthTabData for all environments`() {
         assertEquals(
-            AuthTabData.HttpsScheme(
-                host = "bitwarden.com",
-                path = "duo-callback",
+            AuthTabData.CustomScheme(
+                callbackUrl = "bitwarden://duo-callback",
+                callbackScheme = "bitwarden",
             ),
-            Environment.Prod.Us.duoAuthTabData,
-        )
-        assertEquals(
-            AuthTabData.HttpsScheme(
-                host = "bitwarden.eu",
-                path = "duo-callback",
-            ),
-            Environment.Prod.Eu.duoAuthTabData,
-        )
-        assertEquals(
-            AuthTabData.HttpsScheme(
-                host = "bitwarden-gov.com",
-                path = "duo-callback",
-            ),
-            Environment.Prod.FedRamp.duoAuthTabData,
+            Environment.SelfHosted.DEFAULT.duoAuthTabData,
         )
         assertEquals(
             AuthTabData.HttpsScheme(
@@ -50,25 +36,11 @@ class EnvironmentExtensionsTest {
     @Test
     fun `webAuthnAuthTabData should return the correct AuthTabData for all environments`() {
         assertEquals(
-            AuthTabData.HttpsScheme(
-                host = "bitwarden.com",
-                path = "webauthn-callback",
+            AuthTabData.CustomScheme(
+                callbackUrl = "bitwarden://webauthn-callback",
+                callbackScheme = "bitwarden",
             ),
-            Environment.Prod.Us.webAuthnAuthTabData,
-        )
-        assertEquals(
-            AuthTabData.HttpsScheme(
-                host = "bitwarden.eu",
-                path = "webauthn-callback",
-            ),
-            Environment.Prod.Eu.webAuthnAuthTabData,
-        )
-        assertEquals(
-            AuthTabData.HttpsScheme(
-                host = "bitwarden-gov.com",
-                path = "webauthn-callback",
-            ),
-            Environment.Prod.FedRamp.webAuthnAuthTabData,
+            Environment.SelfHosted.DEFAULT.webAuthnAuthTabData,
         )
         assertEquals(
             AuthTabData.HttpsScheme(
@@ -89,25 +61,11 @@ class EnvironmentExtensionsTest {
     @Test
     fun `ssoAuthTabData should return the correct AuthTabData for all environments`() {
         assertEquals(
-            AuthTabData.HttpsScheme(
-                host = "bitwarden.com",
-                path = "sso-callback",
+            AuthTabData.CustomScheme(
+                callbackUrl = "bitwarden://sso-callback",
+                callbackScheme = "bitwarden",
             ),
-            Environment.Prod.Us.ssoAuthTabData,
-        )
-        assertEquals(
-            AuthTabData.HttpsScheme(
-                host = "bitwarden.eu",
-                path = "sso-callback",
-            ),
-            Environment.Prod.Eu.ssoAuthTabData,
-        )
-        assertEquals(
-            AuthTabData.HttpsScheme(
-                host = "bitwarden-gov.com",
-                path = "sso-callback",
-            ),
-            Environment.Prod.FedRamp.ssoAuthTabData,
+            Environment.SelfHosted.DEFAULT.ssoAuthTabData,
         )
         assertEquals(
             AuthTabData.HttpsScheme(
@@ -126,32 +84,12 @@ class EnvironmentExtensionsTest {
     }
 
     @Test
-    fun `appLinksScheme should return the correct scheme for US environment`() {
-        val expectedScheme = "https"
+    fun `appLinksScheme should return the correct scheme for the default environment`() {
+        val expectedScheme = "bitwarden"
 
         assertEquals(
             expectedScheme,
-            Environment.Prod.Us.appLinksScheme,
-        )
-    }
-
-    @Test
-    fun `appLinksScheme should return the correct scheme for EU environment`() {
-        val expectedScheme = "https"
-
-        assertEquals(
-            expectedScheme,
-            Environment.Prod.Eu.appLinksScheme,
-        )
-    }
-
-    @Test
-    fun `appLinksScheme should return the correct scheme for FedRAMP environment`() {
-        val expectedScheme = "https"
-
-        assertEquals(
-            expectedScheme,
-            Environment.Prod.FedRamp.appLinksScheme,
+            Environment.SelfHosted.DEFAULT.appLinksScheme,
         )
     }
 

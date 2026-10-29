@@ -22,27 +22,6 @@ val Environment.ssoAuthTabData: AuthTabData get() = authTabData(kind = "sso")
 private fun Environment.authTabData(
     kind: String,
 ): AuthTabData = when (this) {
-    is Environment.Prod.Us -> {
-        AuthTabData.HttpsScheme(
-            host = "bitwarden.com",
-            path = "$kind-callback",
-        )
-    }
-
-    is Environment.Prod.Eu -> {
-        AuthTabData.HttpsScheme(
-            host = "bitwarden.eu",
-            path = "$kind-callback",
-        )
-    }
-
-    is Environment.Prod.FedRamp -> {
-        AuthTabData.HttpsScheme(
-            host = "bitwarden-gov.com",
-            path = "$kind-callback",
-        )
-    }
-
     is Environment.SelfHosted -> {
         if (this.isInternal) {
             AuthTabData.HttpsScheme(
@@ -62,6 +41,5 @@ private fun Environment.authTabData(
  */
 val Environment.appLinksScheme: String
     get() = when (this) {
-        is Environment.Prod -> "https"
         is Environment.SelfHosted -> if (this.isInternal) "https" else "bitwarden"
     }

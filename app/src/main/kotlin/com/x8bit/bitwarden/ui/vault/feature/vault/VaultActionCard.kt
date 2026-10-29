@@ -49,36 +49,6 @@ fun VaultActionCard(
             )
         }
 
-        VaultState.ActionCardState.UpgradePremium -> {
-            BitwardenActionCard(
-                cardTitle = stringResource(
-                    id = BitwardenString.unlock_advanced_security_features,
-                ),
-                cardSubtitle = stringResource(
-                    id = BitwardenString
-                        .a_premium_plan_gives_you_more_tools_to_stay_secure_and_in_control,
-                ),
-                actionButton = BitwardenButtonData(
-                    label = BitwardenString.learn_more.asText(),
-                    onClick = { vaultHandlers.actionCardClick(actionCardState) },
-                ),
-                onDismissClick = { vaultHandlers.dismissActionCardClick(actionCardState) },
-                modifier = modifier,
-            )
-        }
-
-        VaultState.ActionCardState.PremiumNeedsAttention -> {
-            BitwardenActionCard(
-                cardTitle = stringResource(id = BitwardenString.your_subscription_needs_attention),
-                cardSubtitle = stringResource(id = BitwardenString.check_your_plan_for_details),
-                actionButton = BitwardenButtonData(
-                    label = BitwardenString.view_plan.asText(),
-                    onClick = { vaultHandlers.actionCardClick(actionCardState) },
-                ),
-                modifier = modifier,
-            )
-        }
-
         VaultState.ActionCardState.IntroducingArchive -> {
             BitwardenActionCard(
                 cardTitle = stringResource(id = BitwardenString.introducing_archive),

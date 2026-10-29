@@ -48,8 +48,6 @@ import com.x8bit.bitwarden.data.autofill.model.AutofillSaveItem
 import com.x8bit.bitwarden.data.autofill.model.AutofillSelectionData
 import com.x8bit.bitwarden.data.autofill.util.getAutofillSaveItemOrNull
 import com.x8bit.bitwarden.data.autofill.util.getAutofillSelectionDataOrNull
-import com.x8bit.bitwarden.data.billing.util.PremiumCheckoutCallbackResult
-import com.x8bit.bitwarden.data.billing.util.getPremiumCheckoutCallbackResult
 import com.x8bit.bitwarden.data.credentials.manager.CredentialProviderRequestManager
 import com.x8bit.bitwarden.data.credentials.manager.model.CredentialProviderRequest
 import com.x8bit.bitwarden.data.credentials.model.CreateCredentialRequest
@@ -74,7 +72,6 @@ import com.x8bit.bitwarden.data.vault.repository.VaultRepository
 import com.x8bit.bitwarden.ui.platform.util.isAccountSecurityShortcut
 import com.x8bit.bitwarden.ui.platform.util.isMyVaultShortcut
 import com.x8bit.bitwarden.ui.platform.util.isPasswordGeneratorShortcut
-import com.x8bit.bitwarden.ui.platform.util.isPremiumCheckoutCallback
 import com.x8bit.bitwarden.ui.vault.util.getTotpDataOrNull
 import io.mockk.coEvery
 import io.mockk.every
@@ -203,13 +200,11 @@ class MainViewModelTest : BaseViewModelTest() {
             AuthTabIntent.AuthResult::getDuoCallbackTokenResult,
             AuthTabIntent.AuthResult::getSsoCallbackResult,
             AuthTabIntent.AuthResult::getWebAuthResult,
-            AuthTabIntent.AuthResult::getPremiumCheckoutCallbackResult,
         )
         mockkStatic(
             Intent::isMyVaultShortcut,
             Intent::isPasswordGeneratorShortcut,
             Intent::isAccountSecurityShortcut,
-            Intent::isPremiumCheckoutCallback,
         )
         mockkObject(
             ProviderCreateCredentialRequest.Companion,
@@ -236,13 +231,11 @@ class MainViewModelTest : BaseViewModelTest() {
             AuthTabIntent.AuthResult::getDuoCallbackTokenResult,
             AuthTabIntent.AuthResult::getSsoCallbackResult,
             AuthTabIntent.AuthResult::getWebAuthResult,
-            AuthTabIntent.AuthResult::getPremiumCheckoutCallbackResult,
         )
         unmockkStatic(
             Intent::isMyVaultShortcut,
             Intent::isPasswordGeneratorShortcut,
             Intent::isAccountSecurityShortcut,
-            Intent::isPremiumCheckoutCallback,
         )
         unmockkObject(
             ProviderCreateCredentialRequest.Companion,
@@ -872,97 +865,9 @@ class MainViewModelTest : BaseViewModelTest() {
     }
 
     @Suppress("MaxLineLength")
-    @Test
-    fun `on ReceiveFirstIntent with Premium checkout success callback should set PremiumCheckoutResult with isSuccess true`() {
-        val viewModel = createViewModel()
-        val mockUri = mockk<Uri> {
-            every { getQueryParameter("result") } returns "success"
-        }
-        val mockIntent = createMockIntent(
-            mockIsPremiumCheckoutCallback = true,
-            mockDataUri = mockUri,
-        )
-
-        viewModel.trySendAction(
-            MainAction.ReceiveFirstIntent(intent = mockIntent),
-        )
-        assertEquals(
-            SpecialCircumstance.PremiumCheckout(
-                callbackResult = PremiumCheckoutCallbackResult.Success,
-            ),
-            specialCircumstanceManager.specialCircumstance,
-        )
-    }
-
     @Suppress("MaxLineLength")
-    @Test
-    fun `on ReceiveFirstIntent with Premium checkout canceled callback should set PremiumCheckoutResult with isSuccess false`() {
-        val viewModel = createViewModel()
-        val mockUri = mockk<Uri> {
-            every { getQueryParameter("result") } returns "canceled"
-        }
-        val mockIntent = createMockIntent(
-            mockIsPremiumCheckoutCallback = true,
-            mockDataUri = mockUri,
-        )
-
-        viewModel.trySendAction(
-            MainAction.ReceiveFirstIntent(intent = mockIntent),
-        )
-        assertEquals(
-            SpecialCircumstance.PremiumCheckout(
-                callbackResult = PremiumCheckoutCallbackResult.Canceled,
-            ),
-            specialCircumstanceManager.specialCircumstance,
-        )
-    }
-
     @Suppress("MaxLineLength")
-    @Test
-    fun `on ReceiveNewIntent with Premium checkout success callback should set PremiumCheckoutResult with isSuccess true`() {
-        val viewModel = createViewModel()
-        val mockUri = mockk<Uri> {
-            every { getQueryParameter("result") } returns "success"
-        }
-        val mockIntent = createMockIntent(
-            mockIsPremiumCheckoutCallback = true,
-            mockDataUri = mockUri,
-        )
-
-        viewModel.trySendAction(
-            MainAction.ReceiveNewIntent(intent = mockIntent),
-        )
-        assertEquals(
-            SpecialCircumstance.PremiumCheckout(
-                callbackResult = PremiumCheckoutCallbackResult.Success,
-            ),
-            specialCircumstanceManager.specialCircumstance,
-        )
-    }
-
     @Suppress("MaxLineLength")
-    @Test
-    fun `on ReceiveNewIntent with Premium checkout canceled callback should set PremiumCheckoutResult with isSuccess false`() {
-        val viewModel = createViewModel()
-        val mockUri = mockk<Uri> {
-            every { getQueryParameter("result") } returns "canceled"
-        }
-        val mockIntent = createMockIntent(
-            mockIsPremiumCheckoutCallback = true,
-            mockDataUri = mockUri,
-        )
-
-        viewModel.trySendAction(
-            MainAction.ReceiveNewIntent(intent = mockIntent),
-        )
-        assertEquals(
-            SpecialCircumstance.PremiumCheckout(
-                callbackResult = PremiumCheckoutCallbackResult.Canceled,
-            ),
-            specialCircumstanceManager.specialCircumstance,
-        )
-    }
-
     @Suppress("MaxLineLength")
     @Test
     fun `on ReceiveNewIntent with a password generator deeplink data should set the special circumstance to GeneratorShortcut`() {
@@ -1257,60 +1162,7 @@ class MainViewModelTest : BaseViewModelTest() {
     }
 
     @Suppress("MaxLineLength")
-    @Test
-    fun `on PremiumCheckoutResult with RESULT_OK should set PremiumCheckoutResult with isSuccess true`() {
-        val authResult = mockk<AuthTabIntent.AuthResult> {
-            every { getPremiumCheckoutCallbackResult() } returns PremiumCheckoutCallbackResult.Success
-        }
-        val viewModel = createViewModel()
-
-        viewModel.trySendAction(
-            MainAction.PremiumCheckoutResult(authResult = authResult),
-        )
-
-        assertEquals(
-            SpecialCircumstance.PremiumCheckout(
-                callbackResult = PremiumCheckoutCallbackResult.Success,
-            ),
-            specialCircumstanceManager.specialCircumstance,
-        )
-    }
-
     @Suppress("MaxLineLength")
-    @Test
-    fun `on PremiumCheckoutResult with RESULT_CANCELED should set PremiumCheckoutResult with isSuccess false`() {
-        val authResult = mockk<AuthTabIntent.AuthResult> {
-            every { getPremiumCheckoutCallbackResult() } returns PremiumCheckoutCallbackResult.Canceled
-        }
-        val viewModel = createViewModel()
-
-        viewModel.trySendAction(
-            MainAction.PremiumCheckoutResult(authResult = authResult),
-        )
-
-        assertEquals(
-            SpecialCircumstance.PremiumCheckout(
-                callbackResult = PremiumCheckoutCallbackResult.Canceled,
-            ),
-            specialCircumstanceManager.specialCircumstance,
-        )
-    }
-
-    @Test
-    fun `on StripePortalResult should set StripePortal special circumstance`() {
-        val authResult = mockk<AuthTabIntent.AuthResult>()
-        val viewModel = createViewModel()
-
-        viewModel.trySendAction(
-            MainAction.StripePortalResult(authResult = authResult),
-        )
-
-        assertEquals(
-            SpecialCircumstance.StripePortal,
-            specialCircumstanceManager.specialCircumstance,
-        )
-    }
-
     @Test
     fun `on handleResizeHasBeenRequested should set hasResizeBeenRequested as true`() = runTest {
         val viewModel = createViewModel()
@@ -1388,7 +1240,7 @@ private val DEFAULT_ACCOUNT = UserState.Account(
     userId = ACTIVE_USER_ID,
     name = "Active User",
     email = "active@bitwarden.com",
-    environment = Environment.Prod.Us,
+    environment = Environment.SelfHosted.DEFAULT,
     avatarColorHex = "#aa00aa",
     isPremium = true,
     isPremiumFromSelf = true,
@@ -1427,7 +1279,6 @@ private fun createMockIntent(
     mockIsMyVaultShortcut: Boolean = false,
     mockIsPasswordGeneratorShortcut: Boolean = false,
     mockIsAccountSecurityShortcut: Boolean = false,
-    mockIsPremiumCheckoutCallback: Boolean = false,
     mockIsAddTotpLoginItemFromAuthenticator: Boolean = false,
     mockProviderImportCredentialsRequest: ProviderImportCredentialsRequest? = null,
     mockDataUri: Uri? = null,
@@ -1440,7 +1291,6 @@ private fun createMockIntent(
     every { isMyVaultShortcut } returns mockIsMyVaultShortcut
     every { isPasswordGeneratorShortcut } returns mockIsPasswordGeneratorShortcut
     every { isAccountSecurityShortcut } returns mockIsAccountSecurityShortcut
-    every { isPremiumCheckoutCallback } returns mockIsPremiumCheckoutCallback
     every { isAddTotpLoginItemFromAuthenticator() } returns mockIsAddTotpLoginItemFromAuthenticator
     every { getProviderImportCredentialsRequest() } returns mockProviderImportCredentialsRequest
     every { data } returns mockDataUri

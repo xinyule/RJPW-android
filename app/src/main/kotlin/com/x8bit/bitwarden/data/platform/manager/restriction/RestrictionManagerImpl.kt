@@ -26,19 +26,9 @@ class RestrictionManagerImpl(
     }
 
     private fun setPreconfiguredUrl(baseEnvironmentUrl: String) {
-        environmentRepository.environment = when (baseEnvironmentUrl) {
-            // If the baseEnvironmentUrl matches the predefined US environment, assume it is the
-            // default US environment.
-            Environment.Prod.Us.environmentUrlData.base -> Environment.Prod.Us
-            // If the baseEnvironmentUrl matches the predefined EU environment, assume it is the
-            // default EU environment.
-            Environment.Prod.Eu.environmentUrlData.base -> Environment.Prod.Eu
-            // If the baseEnvironmentUrl matches the predefined FedRAMP environment, assume it is
-            // the default FedRAMP environment.
-            Environment.Prod.FedRamp.environmentUrlData.base -> Environment.Prod.FedRamp
-            // Otherwise make a custom self-host environment.
-            else -> Environment.SelfHosted(EnvironmentUrlDataJson(baseEnvironmentUrl))
-        }
+        // Every environment is a custom self-hosted environment.
+        environmentRepository.environment =
+            Environment.SelfHosted(EnvironmentUrlDataJson(baseEnvironmentUrl))
     }
 }
 

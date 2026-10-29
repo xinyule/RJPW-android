@@ -48,7 +48,6 @@ import com.bitwarden.ui.util.performLogoutAccountClick
 import com.bitwarden.ui.util.performRemoveAccountClick
 import com.bitwarden.ui.util.performYesDialogButtonClick
 import com.bitwarden.vault.CipherType
-import com.x8bit.bitwarden.data.billing.model.PremiumCard
 import com.x8bit.bitwarden.data.platform.repository.model.VaultSection
 import com.x8bit.bitwarden.ui.platform.base.BitwardenComposeTest
 import com.x8bit.bitwarden.ui.platform.manager.review.AppReviewManager
@@ -1790,97 +1789,6 @@ class VaultScreenTest : BitwardenComposeTest() {
     }
 
     @Test
-    fun `UpgradePremium action card should display when eligible`() {
-        mutableStateFlow.value = DEFAULT_STATE.copy(
-            premiumCard = PremiumCard.UPGRADE,
-            viewState = DEFAULT_CONTENT_VIEW_STATE,
-        )
-
-        composeTestRule
-            .onNodeWithText(text = "Unlock advanced security features")
-            .assertIsDisplayed()
-        composeTestRule
-            .onNodeWithText(text = "Learn more")
-            .assertIsDisplayed()
-    }
-
-    @Test
-    fun `UpgradePremium action card CTA click should send ActionCardClick`() {
-        mutableStateFlow.value = DEFAULT_STATE.copy(
-            premiumCard = PremiumCard.UPGRADE,
-            viewState = DEFAULT_CONTENT_VIEW_STATE,
-        )
-
-        composeTestRule
-            .onNodeWithText(text = "Learn more")
-            .assertIsDisplayed()
-            .performClick()
-
-        verify(exactly = 1) {
-            viewModel.trySendAction(
-                VaultAction.ActionCardClick(
-                    actionCard = VaultState.ActionCardState.UpgradePremium,
-                ),
-            )
-        }
-    }
-
-    @Test
-    fun `UpgradePremium action card dismiss click should send DismissActionCardClick`() {
-        mutableStateFlow.value = DEFAULT_STATE.copy(
-            premiumCard = PremiumCard.UPGRADE,
-            viewState = DEFAULT_CONTENT_VIEW_STATE,
-        )
-
-        composeTestRule
-            .onNodeWithContentDescription(label = "Close")
-            .assertIsDisplayed()
-            .performClick()
-
-        verify(exactly = 1) {
-            viewModel.trySendAction(
-                VaultAction.DismissActionCardClick(VaultState.ActionCardState.UpgradePremium),
-            )
-        }
-    }
-
-    @Test
-    fun `PremiumNeedsAttention action card should display when eligible`() {
-        mutableStateFlow.value = DEFAULT_STATE.copy(
-            premiumCard = PremiumCard.NEEDS_ATTENTION,
-            viewState = DEFAULT_CONTENT_VIEW_STATE,
-        )
-
-        composeTestRule
-            .onNodeWithText(text = "Your subscription needs attention")
-            .assertIsDisplayed()
-        composeTestRule
-            .onNodeWithText(text = "View plan")
-            .assertIsDisplayed()
-    }
-
-    @Test
-    fun `PremiumNeedsAttention action card CTA click should send ActionCardClick`() {
-        mutableStateFlow.value = DEFAULT_STATE.copy(
-            premiumCard = PremiumCard.NEEDS_ATTENTION,
-            viewState = DEFAULT_CONTENT_VIEW_STATE,
-        )
-
-        composeTestRule
-            .onNodeWithText(text = "View plan")
-            .assertIsDisplayed()
-            .performClick()
-
-        verify(exactly = 1) {
-            viewModel.trySendAction(
-                VaultAction.ActionCardClick(
-                    actionCard = VaultState.ActionCardState.PremiumNeedsAttention,
-                ),
-            )
-        }
-    }
-
-    @Test
     fun `UpgradedToPremium action card should display when eligible`() {
         mutableStateFlow.value = DEFAULT_STATE.copy(
             isUpgradedToPremiumCardEligible = true,
@@ -3068,7 +2976,7 @@ private val DEFAULT_STATE: VaultState = VaultState(
     viewState = VaultState.ViewState.Loading,
     isPremium = false,
     isPullToRefreshSettingEnabled = false,
-    baseIconUrl = Environment.Prod.Us.baseIconUrl,
+    baseIconUrl = Environment.SelfHosted.DEFAULT.baseIconUrl,
     isIconLoadingDisabled = false,
     hasMasterPassword = true,
     isRefreshing = false,

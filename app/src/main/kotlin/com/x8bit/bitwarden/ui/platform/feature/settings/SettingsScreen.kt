@@ -69,8 +69,6 @@ fun SettingsScreen(
             SettingsEvent.NavigateOther -> onNavigateToOther()
             SettingsEvent.NavigateVault -> onNavigateToVault()
             SettingsEvent.NavigateAccountSecurityShortcut -> onNavigateToAccountSecurity()
-            SettingsEvent.NavigatePlan -> onNavigateToPlan()
-            is SettingsEvent.NavigateToUrl -> intentManager.launchUri(event.url.toUri())
         }
     }
 
@@ -103,35 +101,6 @@ fun SettingsScreen(
                 .verticalScroll(state = rememberScrollState()),
         ) {
             Spacer(modifier = Modifier.height(height = 12.dp))
-            if (state.shouldShowUpgradedToPremiumCard) {
-                BitwardenActionCard(
-                    cardTitle = stringResource(id = BitwardenString.upgraded_to_premium),
-                    cardSubtitle = stringResource(
-                        id = BitwardenString.you_now_have_access_to_all_advanced_security_features,
-                    ),
-                    actionButton = BitwardenButtonData(
-                        label = BitwardenString.learn_more.asText(),
-                        onClick = {
-                            viewModel.trySendAction(SettingsAction.UpgradedToPremiumCardClick)
-                        },
-                        isExternalLink = true,
-                    ),
-                    leadingContent = {
-                        Icon(
-                            painter = rememberVectorPainter(id = BitwardenDrawable.ic_star),
-                            contentDescription = null,
-                            tint = BitwardenTheme.colorScheme.icon.secondary,
-                        )
-                    },
-                    onDismissClick = {
-                        viewModel.trySendAction(SettingsAction.UpgradedToPremiumCardDismiss)
-                    },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .standardHorizontalMargin(),
-                )
-                Spacer(modifier = Modifier.height(height = 12.dp))
-            }
             state.settingRows.forEachIndexed { index, settingEntry ->
                 BitwardenPushRow(
                     text = settingEntry.text(),

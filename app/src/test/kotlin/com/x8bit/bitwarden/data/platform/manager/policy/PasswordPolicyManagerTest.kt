@@ -449,7 +449,7 @@ private val PROFILE_1 = BASE_PROFILE_1.copy(
 private val ACCOUNT_1 = AccountJson(
     profile = PROFILE_1,
     settings = AccountJson.Settings(
-        environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+        environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
     ),
 )
 

@@ -467,7 +467,7 @@ private val MOCK_PROFILE = AccountJson.Profile(
 private val MOCK_ACCOUNT = AccountJson(
     profile = MOCK_PROFILE,
     settings = AccountJson.Settings(
-        environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+        environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
     ),
 )
 

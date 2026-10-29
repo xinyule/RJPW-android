@@ -10,8 +10,6 @@ import com.bitwarden.ui.platform.resource.BitwardenDrawable
 import com.bitwarden.ui.platform.resource.BitwardenString
 import com.bitwarden.ui.util.Text
 import com.bitwarden.ui.util.asText
-import com.x8bit.bitwarden.data.billing.manager.PremiumStateManager
-import com.x8bit.bitwarden.data.billing.manager.UPGRADED_TO_PREMIUM_LEARN_MORE_URL
 import com.x8bit.bitwarden.data.platform.manager.FirstTimeActionManager
 import com.x8bit.bitwarden.data.platform.manager.SpecialCircumstanceManager
 import com.x8bit.bitwarden.data.platform.manager.model.SpecialCircumstance
@@ -32,7 +30,6 @@ import javax.inject.Inject
 class SettingsViewModel @Inject constructor(
     specialCircumstanceManager: SpecialCircumstanceManager,
     firstTimeActionManager: FirstTimeActionManager,
-    private val premiumStateManager: PremiumStateManager,
     savedStateHandle: SavedStateHandle,
 ) : BaseViewModel<SettingsState, SettingsEvent, SettingsAction>(
     initialState = SettingsState(
@@ -40,11 +37,6 @@ class SettingsViewModel @Inject constructor(
         securityCount = firstTimeActionManager.allSecuritySettingsBadgeCountFlow.value,
         autoFillCount = firstTimeActionManager.allAutofillSettingsBadgeCountFlow.value,
         vaultCount = firstTimeActionManager.allVaultSettingsBadgeCountFlow.value,
-        isPlanRowEligible = premiumStateManager.isPlanRowEligibleFlow.value,
-        isSelfHosted = premiumStateManager.isSelfHostedFlow.value,
-        isUpgradedToPremiumCardEligible = premiumStateManager
-            .isUpgradedToPremiumCardEligibleFlow
-            .value,
     ),
 ) {
 
@@ -63,26 +55,6 @@ class SettingsViewModel @Inject constructor(
             .onEach(::sendAction)
             .launchIn(viewModelScope)
 
-        premiumStateManager
-            .isPlanRowEligibleFlow
-            .map { SettingsAction.Internal.PlanRowEligibilityReceive(isEligible = it) }
-            .onEach(::sendAction)
-            .launchIn(viewModelScope)
-
-        premiumStateManager
-            .isUpgradedToPremiumCardEligibleFlow
-            .map {
-                SettingsAction.Internal.UpgradedToPremiumCardEligibilityReceive(isEligible = it)
-            }
-            .onEach(::sendAction)
-            .launchIn(viewModelScope)
-
-        premiumStateManager
-            .isSelfHostedFlow
-            .map { SettingsAction.Internal.SelfHostedStatusReceive(isSelfHosted = it) }
-            .onEach(::sendAction)
-            .launchIn(viewModelScope)
-
         when (specialCircumstanceManager.specialCircumstance) {
             SpecialCircumstance.AccountSecurityShortcut -> {
                 sendEvent(SettingsEvent.NavigateAccountSecurityShortcut)
@@ -96,48 +68,10 @@ class SettingsViewModel @Inject constructor(
     override fun handleAction(action: SettingsAction): Unit = when (action) {
         is SettingsAction.CloseClick -> handleCloseClick()
         is SettingsAction.SettingsClick -> handleSettingsClick(action)
-        SettingsAction.UpgradedToPremiumCardClick -> handleUpgradedToPremiumCardClick()
-        SettingsAction.UpgradedToPremiumCardDismiss -> handleUpgradedToPremiumCardDismiss()
         is SettingsAction.Internal.SettingsNotificationCountUpdate -> {
             handleSettingsNotificationCountUpdate(action)
         }
 
-        is SettingsAction.Internal.PlanRowEligibilityReceive -> {
-            handlePlanRowEligibilityReceive(action)
-        }
-
-        is SettingsAction.Internal.UpgradedToPremiumCardEligibilityReceive -> {
-            handleUpgradedToPremiumCardEligibilityReceive(action)
-        }
-
-        is SettingsAction.Internal.SelfHostedStatusReceive -> {
-            handleSelfHostedStatusReceive(action)
-        }
-    }
-
-    private fun handleSelfHostedStatusReceive(
-        action: SettingsAction.Internal.SelfHostedStatusReceive,
-    ) {
-        mutableStateFlow.update {
-            it.copy(isSelfHosted = action.isSelfHosted)
-        }
-    }
-
-    private fun handleUpgradedToPremiumCardClick() {
-        premiumStateManager.dismissUpgradedToPremiumCard()
-        sendEvent(SettingsEvent.NavigateToUrl(url = UPGRADED_TO_PREMIUM_LEARN_MORE_URL))
-    }
-
-    private fun handleUpgradedToPremiumCardDismiss() {
-        premiumStateManager.dismissUpgradedToPremiumCard()
-    }
-
-    private fun handleUpgradedToPremiumCardEligibilityReceive(
-        action: SettingsAction.Internal.UpgradedToPremiumCardEligibilityReceive,
-    ) {
-        mutableStateFlow.update {
-            it.copy(isUpgradedToPremiumCardEligible = action.isEligible)
-        }
     }
 
     private fun handleCloseClick() {
@@ -156,12 +90,6 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
-    private fun handlePlanRowEligibilityReceive(
-        action: SettingsAction.Internal.PlanRowEligibilityReceive,
-    ) {
-        mutableStateFlow.update { it.copy(isPlanRowEligible = action.isEligible) }
-    }
-
     private fun handleSettingsClick(action: SettingsAction.SettingsClick) {
         when (action.settings) {
             Settings.ACCOUNT_SECURITY -> {
@@ -178,10 +106,6 @@ class SettingsViewModel @Inject constructor(
 
             Settings.APPEARANCE -> {
                 sendEvent(SettingsEvent.NavigateAppearance)
-            }
-
-            Settings.PLAN -> {
-                sendEvent(SettingsEvent.NavigatePlan)
             }
 
             Settings.OTHER -> {
@@ -203,26 +127,8 @@ data class SettingsState(
     private val autoFillCount: Int,
     private val securityCount: Int,
     private val vaultCount: Int,
-    private val isPlanRowEligible: Boolean,
-    private val isSelfHosted: Boolean = false,
-    private val isUpgradedToPremiumCardEligible: Boolean = false,
 ) {
     val shouldShowCloseButton: Boolean = isPreAuth
-
-    /**
-     * Whether the "Upgraded to Premium" action card should be shown. The card is only visible
-     * post-authentication.
-     */
-    val shouldShowUpgradedToPremiumCard: Boolean = !isPreAuth && isUpgradedToPremiumCardEligible
-
-    /**
-     * Whether the plan row should be shown. The row is visible post-authentication when the user
-     * is eligible per [PremiumStateManager.isPlanRowEligibleFlow] — currently, when the in-app
-     * upgrade feature is enabled and the user is not relying solely on organization-granted
-     * Premium — and the account is on a cloud-hosted environment. Self-hosted users manage their
-     * subscription on the web vault.
-     */
-    private val shouldShowPlanRow: Boolean = !isPreAuth && isPlanRowEligible && !isSelfHosted
 
     val settingRows: ImmutableList<Settings> = Settings
         .entries
@@ -232,7 +138,6 @@ data class SettingsState(
                 Settings.AUTO_FILL -> !isPreAuth
                 Settings.VAULT -> !isPreAuth
                 Settings.APPEARANCE -> true
-                Settings.PLAN -> shouldShowPlanRow
                 Settings.OTHER -> true
                 Settings.ABOUT -> true
             }
@@ -290,17 +195,6 @@ sealed class SettingsEvent {
      */
     data object NavigateVault : SettingsEvent()
 
-    /**
-     * Navigate to the plan screen.
-     */
-    data object NavigatePlan : SettingsEvent()
-
-    /**
-     * Navigate the user to the given external [url].
-     */
-    data class NavigateToUrl(
-        val url: String,
-    ) : SettingsEvent()
 }
 
 /**
@@ -320,16 +214,6 @@ sealed class SettingsAction {
     ) : SettingsAction()
 
     /**
-     * User clicked the "Learn more" CTA on the "Upgraded to Premium" action card.
-     */
-    data object UpgradedToPremiumCardClick : SettingsAction()
-
-    /**
-     * User clicked the dismiss icon on the "Upgraded to Premium" action card.
-     */
-    data object UpgradedToPremiumCardDismiss : SettingsAction()
-
-    /**
      * Models internal actions for the settings screen.
      */
     sealed class Internal : SettingsAction() {
@@ -342,27 +226,6 @@ sealed class SettingsAction {
             val vaultCount: Int,
         ) : Internal()
 
-        /**
-         * Indicates that the Plan row eligibility has been updated.
-         */
-        data class PlanRowEligibilityReceive(
-            val isEligible: Boolean,
-        ) : Internal()
-
-        /**
-         * Indicates that the "Upgraded to Premium" action card eligibility has been updated.
-         */
-        data class UpgradedToPremiumCardEligibilityReceive(
-            val isEligible: Boolean,
-        ) : Internal()
-
-        /**
-         * Indicates that the effective self-hosted status for premium gating has been updated —
-         * driven by environment changes or by the debug-only self-host-bypass flag.
-         */
-        data class SelfHostedStatusReceive(
-            val isSelfHosted: Boolean,
-        ) : Internal()
     }
 }
 
@@ -396,11 +259,6 @@ enum class Settings(
         text = BitwardenString.appearance.asText(),
         vectorIconRes = BitwardenDrawable.ic_paintbrush,
         testTag = "AppearanceSettingsButton",
-    ),
-    PLAN(
-        text = BitwardenString.plan.asText(),
-        vectorIconRes = BitwardenDrawable.ic_plan,
-        testTag = "PlanSettingsButton",
     ),
     OTHER(
         text = BitwardenString.other.asText(),

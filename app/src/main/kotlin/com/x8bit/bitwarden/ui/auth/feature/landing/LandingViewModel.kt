@@ -261,20 +261,13 @@ class LandingViewModel @Inject constructor(
     }
 
     private fun handleEnvironmentTypeSelect(action: LandingAction.EnvironmentTypeSelect) {
-        val environment = when (action.environmentType) {
-            Environment.Type.US -> Environment.Prod.Us
-            Environment.Type.EU -> Environment.Prod.Eu
-            Environment.Type.FED_RAMP -> Environment.Prod.FedRamp
+        when (action.environmentType) {
             Environment.Type.SELF_HOSTED -> {
                 // Launch the self-hosted screen and select the full environment details there.
                 sendEvent(LandingEvent.NavigateToEnvironment)
                 return
             }
         }
-
-        // Update the environment in the repo; the VM state will update accordingly because it is
-        // listening for changes.
-        environmentRepository.environment = environment
     }
 
     private fun handleUpdatedEnvironmentReceive(
@@ -345,7 +338,6 @@ data class LandingState(
     val environmentTypeOptions: ImmutableList<Environment.Type>
         get() = Environment.Type
             .entries
-            .filterNot { it == Environment.Type.FED_RAMP && !isFedRampEnabled }
             .toImmutableList()
 
     /**

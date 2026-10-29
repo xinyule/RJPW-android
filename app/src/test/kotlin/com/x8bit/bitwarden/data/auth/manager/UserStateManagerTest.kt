@@ -343,7 +343,7 @@ private val PROFILE_1 = AccountJson.Profile(
 private val ACCOUNT_1 = AccountJson(
     profile = PROFILE_1,
     settings = AccountJson.Settings(
-        environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+        environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
     ),
 )
 private val ACCOUNT_2 = AccountJson(
@@ -367,7 +367,7 @@ private val ACCOUNT_2 = AccountJson(
         creationDate = Instant.parse("2024-09-13T01:00:00.00Z"),
     ),
     settings = AccountJson.Settings(
-        environmentUrlData = EnvironmentUrlDataJson.DEFAULT_EU,
+        environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
     ),
 )
 private val SINGLE_USER_STATE_1 = UserStateJson(

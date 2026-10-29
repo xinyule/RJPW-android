@@ -192,7 +192,7 @@ class AuthRepositoryTest {
     private val fakeAuthDiskSource = FakeAuthDiskSource()
     private val fakeSettingsDiskSource = FakeSettingsDiskSource()
     private val fakeEnvironmentRepository = FakeEnvironmentRepository().apply {
-        environment = Environment.Prod.Us
+        environment = Environment.SelfHosted.DEFAULT
     }
     private val settingsRepository: SettingsRepository = mockk {
         every { setDefaultsIfNecessary(any()) } just runs
@@ -1987,7 +1987,7 @@ class AuthRepositoryTest {
             every {
                 GET_TOKEN_WITH_ACCOUNT_KEYS_RESPONSE_SUCCESS.toUserState(
                     previousUserState = null,
-                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
                     passwordPassesPolicy = true,
                 )
             } returns SINGLE_USER_STATE_1
@@ -2083,7 +2083,7 @@ class AuthRepositoryTest {
             every {
                 successResponse.toUserState(
                     previousUserState = null,
-                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
                     passwordPassesPolicy = false,
                 )
             } returns weakPasswordUserState
@@ -2144,7 +2144,7 @@ class AuthRepositoryTest {
             every {
                 successResponse.toUserState(
                     previousUserState = null,
-                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
                     passwordPassesPolicy = true,
                 )
             } returns SINGLE_USER_STATE_1
@@ -2196,7 +2196,7 @@ class AuthRepositoryTest {
             every {
                 GET_TOKEN_WITH_ACCOUNT_KEYS_RESPONSE_SUCCESS.toUserState(
                     previousUserState = null,
-                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
                     passwordPassesPolicy = true,
                 )
             } returns SINGLE_USER_STATE_1
@@ -2235,7 +2235,7 @@ class AuthRepositoryTest {
             every {
                 successResponse.toUserState(
                     previousUserState = null,
-                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
                     passwordPassesPolicy = true,
                 )
             } returns SINGLE_USER_STATE_1
@@ -2299,7 +2299,7 @@ class AuthRepositoryTest {
             every {
                 successResponse.toUserState(
                     previousUserState = null,
-                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
                     passwordPassesPolicy = true,
                 )
             } returns SINGLE_USER_STATE_1
@@ -2382,7 +2382,7 @@ class AuthRepositoryTest {
             every {
                 GET_TOKEN_WITH_ACCOUNT_KEYS_RESPONSE_SUCCESS.toUserState(
                     previousUserState = null,
-                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
                     passwordPassesPolicy = true,
                 )
             } returns SINGLE_USER_STATE_1
@@ -2465,7 +2465,7 @@ class AuthRepositoryTest {
             every {
                 successResponse.toUserState(
                     previousUserState = null,
-                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
                     passwordPassesPolicy = true,
                 )
             } returns SINGLE_USER_STATE_1
@@ -2558,7 +2558,7 @@ class AuthRepositoryTest {
             every {
                 GET_TOKEN_WITH_ACCOUNT_KEYS_RESPONSE_SUCCESS.toUserState(
                     previousUserState = SINGLE_USER_STATE_2,
-                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
                     passwordPassesPolicy = true,
                 )
             } returns MULTI_USER_STATE
@@ -2718,7 +2718,7 @@ class AuthRepositoryTest {
         every {
             successResponse.toUserState(
                 previousUserState = null,
-                environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+                environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
                 passwordPassesPolicy = true,
             )
         } returns SINGLE_USER_STATE_1
@@ -2815,7 +2815,7 @@ class AuthRepositoryTest {
             every {
                 successResponse.toUserState(
                     previousUserState = null,
-                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
                     passwordPassesPolicy = true,
                 )
             } returns SINGLE_USER_STATE_1
@@ -2879,7 +2879,7 @@ class AuthRepositoryTest {
         every {
             GET_TOKEN_WITH_ACCOUNT_KEYS_RESPONSE_SUCCESS.toUserState(
                 previousUserState = null,
-                environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+                environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
                 passwordPassesPolicy = true,
             )
         } returns SINGLE_USER_STATE_1
@@ -3083,7 +3083,7 @@ class AuthRepositoryTest {
             every {
                 GET_TOKEN_WITH_ACCOUNT_KEYS_RESPONSE_SUCCESS.toUserState(
                     previousUserState = null,
-                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
                     passwordPassesPolicy = true,
                 )
             } returns SINGLE_USER_STATE_1
@@ -3172,7 +3172,7 @@ class AuthRepositoryTest {
             every {
                 GET_TOKEN_WITH_ACCOUNT_KEYS_RESPONSE_SUCCESS.toUserState(
                     previousUserState = null,
-                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
                     passwordPassesPolicy = true,
                 )
             } returns SINGLE_USER_STATE_1
@@ -3356,7 +3356,7 @@ class AuthRepositoryTest {
         every {
             successResponse.toUserState(
                 previousUserState = null,
-                environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+                environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
                 passwordPassesPolicy = true,
             )
         } returns SINGLE_USER_STATE_1
@@ -3494,7 +3494,7 @@ class AuthRepositoryTest {
             every {
                 GET_TOKEN_WITH_ACCOUNT_KEYS_RESPONSE_SUCCESS.toUserState(
                     previousUserState = null,
-                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
                     passwordPassesPolicy = true,
                 )
             } returns SINGLE_USER_STATE_1
@@ -3559,7 +3559,7 @@ class AuthRepositoryTest {
             every {
                 successResponse.toUserState(
                     previousUserState = null,
-                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
                     passwordPassesPolicy = true,
                 )
             } returns SINGLE_USER_STATE_1
@@ -3636,7 +3636,7 @@ class AuthRepositoryTest {
             every {
                 successResponse.toUserState(
                     previousUserState = null,
-                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
                     passwordPassesPolicy = true,
                 )
             } returns SINGLE_USER_STATE_1
@@ -3722,7 +3722,7 @@ class AuthRepositoryTest {
             every {
                 successResponse.toUserState(
                     previousUserState = null,
-                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
                     passwordPassesPolicy = true,
                 )
             } returns SINGLE_USER_STATE_1
@@ -3815,7 +3815,7 @@ class AuthRepositoryTest {
             every {
                 successResponse.toUserState(
                     previousUserState = null,
-                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
                     passwordPassesPolicy = true,
                 )
             } returns SINGLE_USER_STATE_1
@@ -3907,7 +3907,7 @@ class AuthRepositoryTest {
             every {
                 successResponse.toUserState(
                     previousUserState = null,
-                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
                     passwordPassesPolicy = true,
                 )
             } returns SINGLE_USER_STATE_1
@@ -4021,7 +4021,7 @@ class AuthRepositoryTest {
             every {
                 successResponse.toUserState(
                     previousUserState = null,
-                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
                     passwordPassesPolicy = true,
                 )
             } returns SINGLE_USER_STATE_1
@@ -4116,7 +4116,7 @@ class AuthRepositoryTest {
             every {
                 successResponse.toUserState(
                     previousUserState = null,
-                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
                     passwordPassesPolicy = true,
                 )
             } returns SINGLE_USER_STATE_1
@@ -4171,7 +4171,7 @@ class AuthRepositoryTest {
             every {
                 successResponse.toUserState(
                     previousUserState = null,
-                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
                     passwordPassesPolicy = true,
                 )
             } returns SINGLE_USER_STATE_1
@@ -4263,7 +4263,7 @@ class AuthRepositoryTest {
             every {
                 GET_TOKEN_WITH_ACCOUNT_KEYS_RESPONSE_SUCCESS.toUserState(
                     previousUserState = null,
-                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
                     passwordPassesPolicy = true,
                 )
             } returns SINGLE_USER_STATE_1
@@ -4354,7 +4354,7 @@ class AuthRepositoryTest {
             every {
                 successResponse.toUserState(
                     previousUserState = null,
-                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
                     passwordPassesPolicy = true,
                 )
             } returns SINGLE_USER_STATE_1
@@ -4440,7 +4440,7 @@ class AuthRepositoryTest {
             every {
                 successResponse.toUserState(
                     previousUserState = null,
-                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
                     passwordPassesPolicy = true,
                 )
             } returns SINGLE_USER_STATE_1
@@ -4542,7 +4542,7 @@ class AuthRepositoryTest {
             every {
                 successResponse.toUserState(
                     previousUserState = null,
-                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
                     passwordPassesPolicy = true,
                 )
             } returns SINGLE_USER_STATE_1
@@ -4617,7 +4617,7 @@ class AuthRepositoryTest {
             every {
                 GET_TOKEN_WITH_ACCOUNT_KEYS_RESPONSE_SUCCESS.toUserState(
                     previousUserState = SINGLE_USER_STATE_2,
-                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
                     passwordPassesPolicy = true,
                 )
             } returns MULTI_USER_STATE
@@ -4773,7 +4773,7 @@ class AuthRepositoryTest {
         every {
             successResponse.toUserState(
                 previousUserState = null,
-                environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+                environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
                 passwordPassesPolicy = true,
             )
         } returns SINGLE_USER_STATE_1
@@ -4820,7 +4820,7 @@ class AuthRepositoryTest {
         every {
             GET_TOKEN_WITH_ACCOUNT_KEYS_RESPONSE_SUCCESS.toUserState(
                 previousUserState = null,
-                environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+                environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
                 passwordPassesPolicy = true,
             )
         } returns SINGLE_USER_STATE_1
@@ -6500,7 +6500,7 @@ class AuthRepositoryTest {
     fun `switchAccount when the given userId is the same as the current activeUserId should reset any pending account additions`() {
         val originalUserId = USER_ID_1
         fakeAuthDiskSource.userState = SINGLE_USER_STATE_1
-        fakeEnvironmentRepository.environment = Environment.Prod.Eu
+        fakeEnvironmentRepository.environment = Environment.SelfHosted.DEFAULT
         repository.hasPendingAccountAddition = true
 
         assertEquals(
@@ -6508,7 +6508,7 @@ class AuthRepositoryTest {
             repository.switchAccount(userId = originalUserId),
         )
 
-        assertEquals(Environment.Prod.Us, fakeEnvironmentRepository.environment)
+        assertEquals(Environment.SelfHosted.DEFAULT, fakeEnvironmentRepository.environment)
         verify(exactly = 1) {
             userStateManager.hasPendingAccountAddition = false
         }
@@ -6519,14 +6519,14 @@ class AuthRepositoryTest {
     fun `switchAccount when the given userId does not correspond to a saved account should do nothing`() {
         val invalidId = "invalidId"
         fakeAuthDiskSource.userState = SINGLE_USER_STATE_1
-        fakeEnvironmentRepository.environment = Environment.Prod.Eu
+        fakeEnvironmentRepository.environment = Environment.SelfHosted.DEFAULT
 
         assertEquals(
             SwitchAccountResult.NoChange,
             repository.switchAccount(userId = invalidId),
         )
 
-        assertEquals(Environment.Prod.Us, fakeEnvironmentRepository.environment)
+        assertEquals(Environment.SelfHosted.DEFAULT, fakeEnvironmentRepository.environment)
     }
 
     @Suppress("MaxLineLength")
@@ -6534,7 +6534,7 @@ class AuthRepositoryTest {
     fun `switchAccount when the userId is valid should update the current UserState and reset any pending account additions`() {
         val updatedUserId = USER_ID_2
         fakeAuthDiskSource.userState = MULTI_USER_STATE
-        fakeEnvironmentRepository.environment = Environment.Prod.Eu
+        fakeEnvironmentRepository.environment = Environment.SelfHosted.DEFAULT
         repository.hasPendingAccountAddition = true
 
         assertEquals(
@@ -6542,7 +6542,7 @@ class AuthRepositoryTest {
             repository.switchAccount(userId = updatedUserId),
         )
 
-        assertEquals(Environment.Prod.Eu, fakeEnvironmentRepository.environment)
+        assertEquals(Environment.SelfHosted.DEFAULT, fakeEnvironmentRepository.environment)
         verify(exactly = 1) {
             userStateManager.hasPendingAccountAddition = false
         }
@@ -7247,7 +7247,7 @@ class AuthRepositoryTest {
             every {
                 GET_TOKEN_WITH_ACCOUNT_KEYS_RESPONSE_SUCCESS.toUserState(
                     previousUserState = null,
-                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
                     passwordPassesPolicy = true,
                 )
             } returns SINGLE_USER_STATE_1
@@ -7301,7 +7301,7 @@ class AuthRepositoryTest {
             every {
                 GET_TOKEN_WITH_ACCOUNT_KEYS_RESPONSE_SUCCESS.toUserState(
                     previousUserState = null,
-                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US,
+                    environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
                     passwordPassesPolicy = true,
                 )
             } returns SINGLE_USER_STATE_1
@@ -7536,7 +7536,7 @@ private val PROFILE_1 = BASE_PROFILE_1.copy(
 )
 private val ACCOUNT_1 = AccountJson(
     profile = PROFILE_1,
-    settings = AccountJson.Settings(environmentUrlData = EnvironmentUrlDataJson.DEFAULT_US),
+    settings = AccountJson.Settings(environmentUrlData = EnvironmentUrlDataJson.DEFAULT),
 )
 private val ACCOUNT_2 = AccountJson(
     profile = AccountJson.Profile(
@@ -7559,7 +7559,7 @@ private val ACCOUNT_2 = AccountJson(
         creationDate = Instant.parse("2024-09-13T01:00:00.00Z"),
     ),
     settings = AccountJson.Settings(
-        environmentUrlData = EnvironmentUrlDataJson.DEFAULT_EU,
+        environmentUrlData = EnvironmentUrlDataJson.DEFAULT,
     ),
 )
 private val SINGLE_USER_STATE_1 = UserStateJson(

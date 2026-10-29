@@ -29,7 +29,6 @@ import com.x8bit.bitwarden.data.autofill.accessibility.manager.AccessibilitySele
 import com.x8bit.bitwarden.data.autofill.manager.AutofillSelectionManager
 import com.x8bit.bitwarden.data.autofill.util.getAutofillSaveItemOrNull
 import com.x8bit.bitwarden.data.autofill.util.getAutofillSelectionDataOrNull
-import com.x8bit.bitwarden.data.billing.util.getPremiumCheckoutCallbackResult
 import com.x8bit.bitwarden.data.credentials.manager.CredentialProviderRequestManager
 import com.x8bit.bitwarden.data.credentials.manager.model.CredentialProviderRequest
 import com.x8bit.bitwarden.data.platform.manager.AppResumeManager
@@ -49,7 +48,6 @@ import com.x8bit.bitwarden.ui.platform.model.FeatureFlagsState
 import com.x8bit.bitwarden.ui.platform.util.isAccountSecurityShortcut
 import com.x8bit.bitwarden.ui.platform.util.isMyVaultShortcut
 import com.x8bit.bitwarden.ui.platform.util.isPasswordGeneratorShortcut
-import com.x8bit.bitwarden.ui.platform.util.isPremiumCheckoutCallback
 import com.x8bit.bitwarden.ui.vault.util.getTotpDataOrNull
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.FlowPreview
@@ -201,8 +199,6 @@ class MainViewModel @Inject constructor(
             is MainAction.SsoResult -> handleSsoResult(action)
             is MainAction.WebAuthnResult -> handleWebAuthnResult(action)
             is MainAction.CookieAcquisitionResult -> handleCookieAcquisitionResult(action)
-            is MainAction.PremiumCheckoutResult -> handlePremiumCheckoutResult(action)
-            is MainAction.StripePortalResult -> handleStripePortalResult()
             is MainAction.Internal -> handleInternalAction(action)
         }
     }
@@ -251,16 +247,6 @@ class MainViewModel @Inject constructor(
         authRepository.setCookieCallbackResult(
             result = action.cookieCallbackResult.getCookieCallbackResult(),
         )
-    }
-
-    private fun handlePremiumCheckoutResult(action: MainAction.PremiumCheckoutResult) {
-        specialCircumstanceManager.specialCircumstance = SpecialCircumstance.PremiumCheckout(
-            callbackResult = action.authResult.getPremiumCheckoutCallbackResult(),
-        )
-    }
-
-    private fun handleStripePortalResult() {
-        specialCircumstanceManager.specialCircumstance = SpecialCircumstance.StripePortal
     }
 
     private fun handleAppResumeDataUpdated(action: MainAction.ResumeScreenDataReceived) {
@@ -356,7 +342,6 @@ class MainViewModel @Inject constructor(
         val hasGeneratorShortcut = intent.isPasswordGeneratorShortcut
         val hasVaultShortcut = intent.isMyVaultShortcut
         val hasAccountSecurityShortcut = intent.isAccountSecurityShortcut
-        val hasPremiumCheckoutCallback = intent.isPremiumCheckoutCallback
         val completeRegistrationData = intent.getCompleteRegistrationDataIntentOrNull()
         val importCredentialsRequest = intent.getProviderImportCredentialsRequest()
         val credentialProviderRequest =
@@ -415,13 +400,6 @@ class MainViewModel @Inject constructor(
                         // Allow users back into the already-running app when completing the
                         // Send task when this is not the first intent.
                         shouldFinishWhenComplete = isFirstIntent,
-                    )
-            }
-
-            hasPremiumCheckoutCallback -> {
-                specialCircumstanceManager.specialCircumstance =
-                    SpecialCircumstance.PremiumCheckout(
-                        callbackResult = intent.data.getPremiumCheckoutCallbackResult(),
                     )
             }
 
@@ -579,21 +557,6 @@ sealed class MainAction {
      */
     data class CookieAcquisitionResult(
         val cookieCallbackResult: AuthTabIntent.AuthResult,
-    ) : MainAction()
-
-    /**
-     * Receive the result from the premium checkout flow.
-     */
-    data class PremiumCheckoutResult(
-        val authResult: AuthTabIntent.AuthResult,
-    ) : MainAction()
-
-    /**
-     * Receive the result from the Stripe customer portal flow. The AuthTab does not return a
-     * payload — closing the tab is the only signal that the user is back in the app.
-     */
-    data class StripePortalResult(
-        val authResult: AuthTabIntent.AuthResult,
     ) : MainAction()
 
     /**

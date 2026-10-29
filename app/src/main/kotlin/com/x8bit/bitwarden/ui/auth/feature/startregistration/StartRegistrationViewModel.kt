@@ -49,7 +49,7 @@ class StartRegistrationViewModel @Inject constructor(
         StartRegistrationState(
             emailInput = "",
             nameInput = "",
-            isReceiveMarketingEmailsToggled = environmentType == Environment.Type.US,
+            isReceiveMarketingEmailsToggled = false,
             isContinueButtonEnabled = false,
             selectedEnvironmentType = environmentType,
             dialog = null,
@@ -129,24 +129,13 @@ class StartRegistrationViewModel @Inject constructor(
     }
 
     private fun handleEnvironmentTypeSelect(action: StartRegistrationAction.EnvironmentTypeSelect) {
-        val environment = when (action.environmentType) {
-            Environment.Type.US -> Environment.Prod.Us
-            Environment.Type.EU -> Environment.Prod.Eu
+        when (action.environmentType) {
             Environment.Type.SELF_HOSTED -> {
                 // Launch the self-hosted screen and select the full environment details there.
                 sendEvent(StartRegistrationEvent.NavigateToEnvironment)
                 return
             }
-
-            Environment.Type.FED_RAMP -> {
-                // New account creation is not supported with FedRAMP.
-                return
-            }
         }
-
-        // Update the environment in the repo; the VM state will update accordingly because it is
-        // listening for changes.
-        environmentRepository.environment = environment
     }
 
     private fun handleSnackbarDataReceived(
@@ -334,7 +323,6 @@ data class StartRegistrationState(
     val environmentTypeOptions: ImmutableList<Environment.Type>
         get() = Environment.Type
             .entries
-            .filterNot { it == Environment.Type.FED_RAMP }
             .toImmutableList()
 }
 

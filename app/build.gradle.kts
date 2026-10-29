@@ -290,7 +290,6 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
 
     // Standard-specific flavor dependencies
-    standardImplementation(libs.google.billing)
     standardImplementation(platform(libs.google.firebase.bom))
     standardImplementation(libs.google.firebase.cloud.messaging)
     standardImplementation(libs.google.firebase.crashlytics)
