@@ -57,5 +57,4 @@ class ShortcutUtilsTest {
         assertFalse(mockIntent.isPasswordGeneratorShortcut)
     }
 
-    @Suppress("MaxLineLength")
 }
