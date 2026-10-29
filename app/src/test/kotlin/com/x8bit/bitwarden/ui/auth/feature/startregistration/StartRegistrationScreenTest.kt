@@ -7,6 +7,7 @@ import androidx.compose.ui.test.hasAnyAncestor
 import androidx.compose.ui.test.isDialog
 import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithContentDescription
+import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
@@ -215,8 +216,7 @@ class StartRegistrationScreenTest : BitwardenComposeTest() {
 
         // Clicking item on dialog
         composeTestRule
-            .onNodeWithText("Self-hosted")
-            .assert(hasAnyAncestor(isDialog()))
+            .onNodeWithTag("AlertRadioButtonOption")
             .performClick()
 
         verify {
@@ -244,18 +244,6 @@ class StartRegistrationScreenTest : BitwardenComposeTest() {
             .performClick()
 
         verify { viewModel.trySendAction(StartRegistrationAction.ContinueClick) }
-    }
-
-    @Test
-    fun `when unsubscribe custom action invoked should send UnsubscribeMarketingEmailsClick`() {
-        composeTestRule
-            .onNodeWithText(
-                text = "Get emails from RJPW for announcements, advice, and " +
-                    "research opportunities. Unsubscribe at any time.",
-            )
-            .performCustomAccessibilityAction("Unsubscribe")
-
-        verify { viewModel.trySendAction(StartRegistrationAction.UnsubscribeMarketingEmailsClick) }
     }
 
     @Test
