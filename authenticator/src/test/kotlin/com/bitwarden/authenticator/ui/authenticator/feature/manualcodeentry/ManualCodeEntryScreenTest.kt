@@ -116,7 +116,7 @@ class ManualCodeEntryScreenTest : AuthenticatorComposeTest() {
             it.copy(buttonState = ManualCodeEntryState.ButtonState.SaveToBitwardenPrimary)
         }
         composeTestRule
-            .onNodeWithText("Save to Bitwarden")
+            .onNodeWithText("Save to RJPW")
             .performScrollTo()
             .performClick()
 
@@ -149,7 +149,7 @@ class ManualCodeEntryScreenTest : AuthenticatorComposeTest() {
 
         // Make sure save to bitwarden option is showing:
         composeTestRule
-            .onNodeWithText("Save to Bitwarden")
+            .onNodeWithText("Save to RJPW")
             .assertIsDisplayed()
 
         verify { viewModel.trySendAction(ManualCodeEntryAction.SaveLocallyClick) }

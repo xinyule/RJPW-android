@@ -127,7 +127,7 @@ class ItemListingScreenTest : AuthenticatorComposeTest() {
         )
 
         composeTestRule
-            .onNodeWithText("Unable to sync codes from the Bitwarden app. Make sure both apps are up-to-date. You can still access your existing codes in the Bitwarden app.")
+            .onNodeWithText("Unable to sync codes from the RJPW app. Make sure both apps are up-to-date. You can still access your existing codes in the RJPW app.")
             .assertIsDisplayed()
 
         mutableStateFlow.value = DEFAULT_STATE.copy(
@@ -140,7 +140,7 @@ class ItemListingScreenTest : AuthenticatorComposeTest() {
         )
 
         composeTestRule
-            .onNodeWithText("Unable to sync codes from the Bitwarden app. Make sure both apps are up-to-date. You can still access your existing codes in the Bitwarden app.")
+            .onNodeWithText("Unable to sync codes from the RJPW app. Make sure both apps are up-to-date. You can still access your existing codes in the RJPW app.")
             .assertDoesNotExist()
     }
 
@@ -367,7 +367,7 @@ class ItemListingScreenTest : AuthenticatorComposeTest() {
             .performClick()
 
         composeTestRule
-            .onNodeWithText(text = "Copy to Bitwarden vault")
+            .onNodeWithText(text = "Copy to RJPW vault")
             .performClick()
 
         verify {
@@ -396,7 +396,7 @@ class ItemListingScreenTest : AuthenticatorComposeTest() {
             .performTouchInput { longClick() }
 
         composeTestRule
-            .onNodeWithText(text = "Copy to Bitwarden vault")
+            .onNodeWithText(text = "Copy to RJPW vault")
             .assertDoesNotExist()
     }
 

@@ -42,13 +42,13 @@ class TutorialScreenTest : AuthenticatorComposeTest() {
     @Test
     fun `pages should display and update according to state`() {
         composeTestRule
-            .onNodeWithText("Secure your accounts with Bitwarden Authenticator")
+            .onNodeWithText("Secure your accounts with RJPW Authenticator")
             .assertExists()
             .assertIsDisplayed()
 
         mutableEventFlow.tryEmit(TutorialEvent.UpdatePager(index = 1))
         composeTestRule
-            .onNodeWithText("Secure your accounts with Bitwarden Authenticator")
+            .onNodeWithText("Secure your accounts with RJPW Authenticator")
             .assertDoesNotExist()
 
         composeTestRule

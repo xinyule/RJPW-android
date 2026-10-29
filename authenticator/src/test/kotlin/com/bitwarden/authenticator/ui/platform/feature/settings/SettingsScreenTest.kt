@@ -98,13 +98,13 @@ class SettingsScreenTest : AuthenticatorComposeTest() {
         mutableStateFlow.value = DEFAULT_STATE.copy(
             showSyncWithBitwarden = false,
         )
-        composeTestRule.onNodeWithText("Sync with Bitwarden app").assertDoesNotExist()
+        composeTestRule.onNodeWithText("Sync with RJPW app").assertDoesNotExist()
     }
 
     @Test
     fun `Sync with Bitwarden row click should send SyncWithBitwardenClick action`() {
         composeTestRule
-            .onNodeWithText("Sync with Bitwarden app")
+            .onNodeWithText("Sync with RJPW app")
             .performScrollTo()
             .performClick()
         verify { viewModel.trySendAction(SettingsAction.DataClick.SyncWithBitwardenClick) }
@@ -184,7 +184,7 @@ class SettingsScreenTest : AuthenticatorComposeTest() {
 
             // Select updated option:
             composeTestRule
-                .onNodeWithText("Save to Bitwarden")
+                .onNodeWithText("Save to RJPW")
                 .assertIsDisplayed()
                 .performClick()
 
