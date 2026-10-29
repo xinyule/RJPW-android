@@ -1,0 +1,53 @@
+name: Test Android
+
+# RJPW own CI: manual trigger only, official GitHub actions only.
+# Runs local (JVM) unit tests for the app and its library modules
+# on the fdroid variant where the module defines one.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: gradle
+
+      - name: Install Android SDK components for compileSdk 37
+        run: |
+          SDKMANAGER="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+          yes | "$SDKMANAGER" --licenses > /dev/null || true
+          "$SDKMANAGER" "platforms;android-37" "build-tools;37.0.0"
+
+      - name: Run unit tests
+        run: >
+          ./gradlew
+          :app:testFdroidDebugUnitTest
+          :cxf:testFdroidDebugUnitTest
+          :data:testDebugUnitTest
+          :ui:testDebugUnitTest
+          :core:testDebugUnitTest
+          :network:testDebugUnitTest
+          :authenticatorbridge:testDebugUnitTest
+          :annotation:testDebugUnitTest
+          :authenticator:testDebugUnitTest
+          --stacktrace
+
+      - name: Upload test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: unit-test-reports
+          path: "**/build/reports/tests/"
+          if-no-files-found: ignore

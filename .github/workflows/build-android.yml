@@ -1,0 +1,58 @@
+name: Build Android
+
+# RJPW own CI: manual trigger only, official GitHub actions only,
+# no Bitwarden org resources/secrets. Builds the fdroid variant
+# (project decision: fdroid route first, push notifications later).
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build fdroid APKs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: gradle
+
+      - name: Install Android SDK components for compileSdk 37
+        run: |
+          SDKMANAGER="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+          yes | "$SDKMANAGER" --licenses > /dev/null || true
+          "$SDKMANAGER" "platforms;android-37" "build-tools;37.0.0"
+
+      - name: Build RJPW fdroid debug APK (repo debug keystore)
+        run: ./gradlew :app:assembleFdroidDebug --stacktrace
+
+      - name: Build RJPW fdroid release APK (unsigned)
+        run: ./gradlew :app:assembleFdroidRelease --stacktrace
+
+      - name: Build RJPW Authenticator debug APK (repo debug keystore)
+        run: ./gradlew :authenticator:assembleDebug --stacktrace
+
+      - name: Upload RJPW fdroid debug APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: RJPW-fdroid-debug
+          path: app/build/outputs/apk/fdroid/debug/*.apk
+
+      - name: Upload RJPW fdroid release unsigned APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: RJPW-fdroid-release-unsigned
+          path: app/build/outputs/apk/fdroid/release/*.apk
+
+      - name: Upload RJPW Authenticator debug APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: RJPW-Authenticator-debug
+          path: authenticator/build/outputs/apk/debug/*.apk
