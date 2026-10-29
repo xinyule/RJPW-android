@@ -1,6 +1,6 @@
 import com.android.build.api.dsl.ApplicationExtension
+import com.android.build.api.variant.FilterConfiguration
 import com.android.build.api.variant.impl.VariantOutputImpl
-import com.android.utils.cxx.io.removeExtensionIfPresent
 import com.google.firebase.crashlytics.buildtools.gradle.tasks.InjectMappingFileIdTask
 import com.google.firebase.crashlytics.buildtools.gradle.tasks.UploadMappingFileTask
 import com.google.gms.googleservices.GoogleServicesTask
@@ -103,7 +103,14 @@ configure<ApplicationExtension> {
             applicationIdSuffix = ".dev"
             signingConfig = signingConfigs.getByName("debug")
             isDebuggable = true
-            isMinifyEnabled = false
+            // Same code/resource shrinking as release, so the debug APK stays
+            // representative in size (was: no shrinking, ~76 MB of dex alone).
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro",
+            )
 
             buildConfigField(type = "boolean", name = "HAS_DEBUG_MENU", value = "true")
             buildConfigField(type = "boolean", name = "HAS_LOGS_ENABLED", value = "true")
@@ -149,6 +156,19 @@ configure<ApplicationExtension> {
         }
     }
 
+    // Ship per-ABI APKs instead of one universal APK carrying every ABI's
+    // copy of the native SDK library (~128 MB for four ABIs). arm64-v8a
+    // covers current phones, armeabi-v7a legacy 32-bit devices; the x86
+    // emulator ABIs are intentionally not shipped.
+    splits {
+        abi {
+            isEnable = true
+            reset()
+            include("arm64-v8a", "armeabi-v7a")
+            isUniversalApk = false
+        }
+    }
+
     compileOptions {
         sourceCompatibility(libs.versions.jvmTarget.get())
         targetCompatibility(libs.versions.jvmTarget.get())
@@ -182,37 +202,49 @@ androidComponents {
         val flavorName = appVariant.flavorName
         val variantName = appVariant.name
         val buildType = appVariant.buildType
+        val fileNameWithoutExtension = when (flavorName) {
+            "fdroid" -> "$applicationId-$flavorName"
+            "standard" -> applicationId
+            else -> "$applicationId-$variantName"
+        }
         appVariant
             .outputs
             .mapNotNull { it as? VariantOutputImpl }
             .forEach { output ->
-                val fileNameWithoutExtension = when (flavorName) {
-                    "fdroid" -> "$applicationId-$flavorName"
-                    "standard" -> applicationId
-                    else -> output.outputFileName.get().removeExtensionIfPresent(".apk")
+                // ABI splits produce one output per ABI: suffix the ABI so the
+                // split APKs do not overwrite each other.
+                val abiName = output
+                    .filters
+                    .firstOrNull { it.filterType == FilterConfiguration.FilterType.ABI }
+                    ?.identifier
+                val apkBaseName = if (abiName != null) {
+                    "$fileNameWithoutExtension-$abiName"
+                } else {
+                    fileNameWithoutExtension
                 }
 
                 // Set the APK output filename.
-                output.outputFileName.set("$fileNameWithoutExtension.apk")
-
-                val renameTaskName = "rename${variantName.uppercaseFirstChar()}AabFiles"
-                tasks.register(renameTaskName) {
-                    group = "build"
-                    description = "Renames the bundle files for $variantName variant"
-                    doLast {
-                        val namespace = appVariant.namespace.get()
-                        renameFile(
-                            "$bundlesDir/$variantName/$namespace-$flavorName-$buildType.aab",
-                            "$fileNameWithoutExtension.aab",
-                        )
-                    }
-                }
-                // Force renaming task to execute after the variant is built.
-                val bundleTaskName = "bundle${variantName.uppercaseFirstChar()}"
-                tasks
-                    .named { it == bundleTaskName }
-                    .configureEach { finalizedBy(renameTaskName) }
+                output.outputFileName.set("$apkBaseName.apk")
             }
+
+        // Bundles are not ABI-split: register the AAB rename once per variant.
+        val renameTaskName = "rename${variantName.uppercaseFirstChar()}AabFiles"
+        tasks.register(renameTaskName) {
+            group = "build"
+            description = "Renames the bundle files for $variantName variant"
+            doLast {
+                val namespace = appVariant.namespace.get()
+                renameFile(
+                    "$bundlesDir/$variantName/$namespace-$flavorName-$buildType.aab",
+                    "$fileNameWithoutExtension.aab",
+                )
+            }
+        }
+        // Force renaming task to execute after the variant is built.
+        val bundleTaskName = "bundle${variantName.uppercaseFirstChar()}"
+        tasks
+            .named { it == bundleTaskName }
+            .configureEach { finalizedBy(renameTaskName) }
     }
 }
 
