@@ -339,7 +339,7 @@ class AccountSecurityViewModelTest : BaseViewModelTest() {
                 viewModel.trySendAction(AccountSecurityAction.ChangeMasterPasswordClick)
                 assertEquals(
                     AccountSecurityEvent.NavigateToChangeMasterPassword(
-                        "https://vault.bitwarden.com/#/settings",
+                        "https://pw.7052.cn/#/settings",
                     ),
                     awaitItem(),
                 )
@@ -349,7 +349,7 @@ class AccountSecurityViewModelTest : BaseViewModelTest() {
                 viewModel.trySendAction(AccountSecurityAction.ChangeMasterPasswordClick)
                 assertEquals(
                     AccountSecurityEvent.NavigateToChangeMasterPassword(
-                        "https://vault.bitwarden.eu/#/settings",
+                        "https://pw.7052.cn/#/settings",
                     ),
                     awaitItem(),
                 )
@@ -457,7 +457,7 @@ class AccountSecurityViewModelTest : BaseViewModelTest() {
                 viewModel.trySendAction(AccountSecurityAction.TwoStepLoginClick)
                 assertEquals(
                     AccountSecurityEvent.NavigateToTwoStepLogin(
-                        "https://vault.bitwarden.com/#/settings",
+                        "https://pw.7052.cn/#/settings",
                     ),
                     awaitItem(),
                 )
@@ -467,7 +467,7 @@ class AccountSecurityViewModelTest : BaseViewModelTest() {
                 viewModel.trySendAction(AccountSecurityAction.TwoStepLoginClick)
                 assertEquals(
                     AccountSecurityEvent.NavigateToTwoStepLogin(
-                        "https://vault.bitwarden.eu/#/settings",
+                        "https://pw.7052.cn/#/settings",
                     ),
                     awaitItem(),
                 )

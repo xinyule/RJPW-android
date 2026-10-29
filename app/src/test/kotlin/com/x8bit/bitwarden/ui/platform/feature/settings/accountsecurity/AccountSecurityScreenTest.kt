@@ -358,7 +358,7 @@ class AccountSecurityScreenTest : BitwardenComposeTest() {
         composeTestRule
             .onAllNodesWithText(
                 text = "Your PIN must be at least 4 characters. Your PIN settings will be reset " +
-                    "if you manually log out of the Bitwarden app.",
+                    "if you manually log out of the RJPW app.",
             )
             .filterToOne(hasAnyAncestor(isDialog()))
             .assertIsDisplayed()

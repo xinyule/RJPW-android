@@ -741,7 +741,7 @@ class VaultScreenTest : BitwardenComposeTest() {
     fun `vault load cipher decryption error dialog should be shown or hidden according to the state`() {
         val errorTitle = "Decryption error"
         val errorMessage =
-            "Bitwarden could not decrypt 1 vault item. Copy and share this error report with customer success to avoid additional data loss."
+            "RJPW could not decrypt 1 vault item. Copy and share this error report with customer success to avoid additional data loss."
         composeTestRule.assertNoDialogExists()
         composeTestRule
             .onNodeWithText(errorTitle)
@@ -774,7 +774,7 @@ class VaultScreenTest : BitwardenComposeTest() {
     fun `vault load cipher decryption error dialog should show plural when error is more than one`() {
         val errorTitle = "Decryption error"
         val errorMessage =
-            "Bitwarden could not decrypt 3 vault items. Copy and share this error report with customer success to avoid additional data loss."
+            "RJPW could not decrypt 3 vault items. Copy and share this error report with customer success to avoid additional data loss."
         composeTestRule.assertNoDialogExists()
         composeTestRule
             .onNodeWithText(errorTitle)
@@ -2934,7 +2934,7 @@ private val ACTIVE_ACCOUNT_SUMMARY = AccountSummary(
     name = "Active User",
     email = "active@bitwarden.com",
     avatarColorHex = "#aa00aa",
-    environmentLabel = "bitwarden.com",
+    environmentLabel = "pw.7052.cn",
     isActive = true,
     isLoggedIn = true,
     isVaultUnlocked = true,
@@ -2945,7 +2945,7 @@ private val LOCKED_ACCOUNT_SUMMARY = AccountSummary(
     name = "Locked User",
     email = "locked@bitwarden.com",
     avatarColorHex = "#00aaaa",
-    environmentLabel = "bitwarden.com",
+    environmentLabel = "pw.7052.cn",
     isActive = false,
     isLoggedIn = true,
     isVaultUnlocked = false,

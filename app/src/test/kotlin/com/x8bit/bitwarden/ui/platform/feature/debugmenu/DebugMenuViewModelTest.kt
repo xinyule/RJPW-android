@@ -209,7 +209,7 @@ class DebugMenuViewModelTest : BaseViewModelTest() {
             verify(exactly = 1) {
                 mockCookieAcquisitionRequestManager.setPendingCookieAcquisition(
                     data = CookieAcquisitionRequest(
-                        hostname = "https://vault.bitwarden.com",
+                        hostname = "https://pw.7052.cn",
                     ),
                 )
             }

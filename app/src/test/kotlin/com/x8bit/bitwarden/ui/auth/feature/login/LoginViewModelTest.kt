@@ -340,7 +340,7 @@ class LoginViewModelTest : BaseViewModelTest() {
             fakeEnvironmentRepository.environment = Environment.SelfHosted(
                 environmentUrlData = EnvironmentUrlDataJson(
                     base = "",
-                    webVault = "vault.bitwarden.com",
+                    webVault = "pw.7052.cn",
                 ),
             )
             val viewModel = createViewModel()
@@ -363,7 +363,7 @@ class LoginViewModelTest : BaseViewModelTest() {
                         dialogState = LoginState.DialogState.Error(
                             title = BitwardenString.an_error_has_occurred.asText(),
                             message = BitwardenString.this_account_will_soon_be_deleted_log_in_at_x_to_continue_using_bitwarden
-                                .asText("vault.bitwarden.com"),
+                                .asText("pw.7052.cn"),
                         ),
                     ),
                     awaitItem(),
@@ -453,7 +453,7 @@ class LoginViewModelTest : BaseViewModelTest() {
                         dialogState = LoginState.DialogState.Error(
                             title = BitwardenString.an_error_has_occurred.asText(),
                             message = BitwardenString.this_account_will_soon_be_deleted_log_in_at_x_to_continue_using_bitwarden
-                                .asText("vault.bitwarden.com"),
+                                .asText("pw.7052.cn"),
                         ),
                     ),
                     awaitItem(),

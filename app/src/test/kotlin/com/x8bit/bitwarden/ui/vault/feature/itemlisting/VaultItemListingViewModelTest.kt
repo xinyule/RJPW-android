@@ -1072,7 +1072,7 @@ class VaultItemListingViewModelTest : BaseViewModelTest() {
                 viewModel.trySendAction(VaultItemListingsAction.UpgradeToPremiumClick)
                 assertEquals(
                     VaultItemListingEvent.NavigateToUrl(
-                        url = "https://vault.bitwarden.com/#/" +
+                        url = "https://pw.7052.cn/#/" +
                             "settings/subscription/premium" +
                             "?callToAction=upgradeToPremium",
                     ),
@@ -2892,7 +2892,7 @@ class VaultItemListingViewModelTest : BaseViewModelTest() {
                                 secondSubtitle = "mockRpId-1",
                                 subtitleTestTag = "PasskeyName",
                                 iconData = IconData.Network(
-                                    uri = "https://icons.bitwarden.net/www.mockuri.com/icon.png",
+                                    uri = "https://pw.7052.cn/icons/www.mockuri.com/icon.png",
                                     fallbackIconRes = BitwardenDrawable.ic_bw_passkey,
                                 ),
                                 isAutofill = true,
@@ -3105,7 +3105,7 @@ class VaultItemListingViewModelTest : BaseViewModelTest() {
                                 secondSubtitleTestTag = "PasskeySite",
                                 subtitleTestTag = "PasskeyName",
                                 iconData = IconData.Network(
-                                    uri = "https://icons.bitwarden.net/www.mockuri.com/icon.png",
+                                    uri = "https://pw.7052.cn/icons/www.mockuri.com/icon.png",
                                     fallbackIconRes = BitwardenDrawable.ic_bw_passkey,
                                 ),
                                 isCredentialCreation = true,

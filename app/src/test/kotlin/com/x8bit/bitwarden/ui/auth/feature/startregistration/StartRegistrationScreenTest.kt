@@ -209,13 +209,13 @@ class StartRegistrationScreenTest : BitwardenComposeTest() {
 
         // Clicking to open dialog
         composeTestRule
-            .onNodeWithText(Environment.SelfHosted.DEFAULT.label)
+            .onNodeWithText("Self-hosted")
             .performScrollTo()
             .performClick()
 
         // Clicking item on dialog
         composeTestRule
-            .onNodeWithText(selectedEnvironment.label)
+            .onNodeWithText("Self-hosted")
             .assert(hasAnyAncestor(isDialog()))
             .performClick()
 
@@ -250,7 +250,7 @@ class StartRegistrationScreenTest : BitwardenComposeTest() {
     fun `when unsubscribe custom action invoked should send UnsubscribeMarketingEmailsClick`() {
         composeTestRule
             .onNodeWithText(
-                text = "Get emails from Bitwarden for announcements, advice, and " +
+                text = "Get emails from RJPW for announcements, advice, and " +
                     "research opportunities. Unsubscribe at any time.",
             )
             .performCustomAccessibilityAction("Unsubscribe")

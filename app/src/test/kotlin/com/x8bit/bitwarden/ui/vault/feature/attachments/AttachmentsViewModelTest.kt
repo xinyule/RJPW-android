@@ -157,7 +157,7 @@ class AttachmentsViewModelTest : BaseViewModelTest() {
                 viewModel.trySendAction(AttachmentsAction.UpgradeToPremiumClick)
                 assertEquals(
                     AttachmentsEvent.NavigateToUri(
-                        uri = "https://vault.bitwarden.com/#/settings/subscription" +
+                        uri = "https://pw.7052.cn/#/settings/subscription" +
                             "/premium?callToAction=upgradeToPremium",
                     ),
                     awaitItem(),

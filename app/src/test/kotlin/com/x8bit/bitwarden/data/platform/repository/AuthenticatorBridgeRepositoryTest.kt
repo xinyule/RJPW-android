@@ -436,7 +436,7 @@ private val ACCOUNT_JSON_1 = AccountJson(
     ),
     settings = AccountJson.Settings(
         environmentUrlData = EnvironmentUrlDataJson(
-            base = "https://vault.bitwarden.com",
+            base = "https://pw.7052.cn",
         ),
     ),
 )
@@ -457,7 +457,7 @@ private val ACCOUNT_JSON_2 = AccountJson(
     ),
     settings = AccountJson.Settings(
         environmentUrlData = EnvironmentUrlDataJson(
-            base = "https://vault.bitwarden.com",
+            base = "https://pw.7052.cn",
         ),
     ),
 )

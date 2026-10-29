@@ -513,7 +513,7 @@ class ImportLoginsViewModelTest : BaseViewModelTest() {
     )
 }
 
-private const val DEFAULT_VAULT_URL = "vault.bitwarden.com"
+private const val DEFAULT_VAULT_URL = "pw.7052.cn"
 
 private val DEFAULT_STATE = ImportLoginsState(
     dialogState = null,

@@ -737,7 +737,7 @@ class VaultViewModelTest : BaseViewModelTest() {
                         name = "Other User",
                         email = "active@bitwarden.com",
                         avatarColorHex = "#00aaaa",
-                        environmentLabel = "bitwarden.com",
+                        environmentLabel = "pw.7052.cn",
                         isActive = true,
                         isLoggedIn = true,
                         isVaultUnlocked = true,
@@ -824,7 +824,7 @@ class VaultViewModelTest : BaseViewModelTest() {
                         name = "Other User",
                         email = "active@bitwarden.com",
                         avatarColorHex = "#00aaaa",
-                        environmentLabel = "bitwarden.com",
+                        environmentLabel = "pw.7052.cn",
                         isActive = true,
                         isLoggedIn = true,
                         isVaultUnlocked = true,
@@ -990,7 +990,7 @@ class VaultViewModelTest : BaseViewModelTest() {
                 viewModel.trySendAction(VaultAction.UpgradeToPremiumClick)
                 assertEquals(
                     VaultEvent.NavigateToUrl(
-                        url = "https://vault.bitwarden.com/#/" +
+                        url = "https://pw.7052.cn/#/" +
                             "settings/subscription/premium" +
                             "?callToAction=upgradeToPremium",
                     ),
@@ -4785,7 +4785,7 @@ private fun createMockVaultState(
                 name = "Active User",
                 email = "active@bitwarden.com",
                 avatarColorHex = "#aa00aa",
-                environmentLabel = "bitwarden.com",
+                environmentLabel = "pw.7052.cn",
                 isActive = true,
                 isLoggedIn = true,
                 isVaultUnlocked = true,
@@ -4795,7 +4795,7 @@ private fun createMockVaultState(
                 name = "Locked User",
                 email = "locked@bitwarden.com",
                 avatarColorHex = "#00aaaa",
-                environmentLabel = "bitwarden.com",
+                environmentLabel = "pw.7052.cn",
                 isActive = false,
                 isLoggedIn = true,
                 isVaultUnlocked = false,

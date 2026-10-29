@@ -638,7 +638,7 @@ class VaultAddEditViewModelTest : BaseViewModelTest() {
                 viewModel.trySendAction(VaultAddEditAction.Common.UpgradeToPremiumClick)
                 assertEquals(
                     VaultAddEditEvent.NavigateToPremium(
-                        uri = "https://vault.bitwarden.com/#/" +
+                        uri = "https://pw.7052.cn/#/" +
                             "settings/subscription/premium" +
                             "?callToAction=upgradeToPremium",
                     ),

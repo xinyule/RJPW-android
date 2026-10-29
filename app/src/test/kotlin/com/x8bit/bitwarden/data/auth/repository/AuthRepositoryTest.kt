@@ -7344,7 +7344,7 @@ private val FIXED_CLOCK: Clock = Clock.fixed(
     Instant.parse("2023-10-27T12:00:00Z"),
     ZoneOffset.UTC,
 )
-private const val DEEPLINK_SCHEME = "https"
+private const val DEEPLINK_SCHEME = "bitwarden"
 private const val UNIQUE_APP_ID = "testUniqueAppId"
 private const val NAME = "Example Name"
 private const val EMAIL = "test@bitwarden.com"

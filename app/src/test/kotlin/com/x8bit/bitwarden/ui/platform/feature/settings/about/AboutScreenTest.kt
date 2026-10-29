@@ -107,7 +107,7 @@ class AboutScreenTest : BitwardenComposeTest() {
     @Test
     fun `on bitwarden help center click should display confirmation dialog and confirm click should emit HelpCenterClick`() {
         composeTestRule.onNode(isDialog()).assertDoesNotExist()
-        composeTestRule.onNodeWithText("Bitwarden help center").performClick()
+        composeTestRule.onNodeWithText("RJPW help center").performClick()
         composeTestRule.onNode(isDialog()).assertExists()
         composeTestRule
             .onAllNodesWithText("Continue")
@@ -139,7 +139,7 @@ class AboutScreenTest : BitwardenComposeTest() {
     @Test
     fun `on bitwarden web vault click should display confirmation dialog and confirm click should emit WebVaultClick`() {
         composeTestRule.onNode(isDialog()).assertDoesNotExist()
-        composeTestRule.onNodeWithText("Bitwarden web vault").performClick()
+        composeTestRule.onNodeWithText("RJPW web vault").performClick()
         composeTestRule.onNode(isDialog()).assertExists()
         composeTestRule
             .onAllNodesWithText("Continue")
