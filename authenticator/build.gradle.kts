@@ -32,7 +32,7 @@ val ciProperties = Properties().apply {
 base {
     // Set the base archive name for publishing purposes. This is used to derive the
     // APK and AAB artifact names when uploading to Firebase and Play Store.
-    archivesName.set("com.bitwarden.authenticator")
+    archivesName.set("RJPW-Authenticator")
 }
 
 room3 {
@@ -46,7 +46,7 @@ configure<ApplicationExtension> {
     }
 
     defaultConfig {
-        applicationId = "com.bitwarden.authenticator"
+        applicationId = "com.rjpw.authenticator"
         minSdk {
             version = release(libs.versions.minSdk.get().toInt())
         }
@@ -87,7 +87,7 @@ configure<ApplicationExtension> {
     buildTypes {
         debug {
             applicationIdSuffix = ".dev"
-            manifestPlaceholders["targetBitwardenAppId"] = "com.x8bit.bitwarden.dev"
+            manifestPlaceholders["targetBitwardenAppId"] = "com.rjpw.android.dev"
             @Suppress("MaxLineLength")
             buildConfigField(
                 type = "com.bitwarden.authenticatorbridge.manager.model.AuthenticatorBridgeConnectionType",
@@ -101,7 +101,7 @@ configure<ApplicationExtension> {
         }
 
         release {
-            manifestPlaceholders["targetBitwardenAppId"] = "com.x8bit.bitwarden"
+            manifestPlaceholders["targetBitwardenAppId"] = "com.rjpw.android"
             @Suppress("MaxLineLength")
             buildConfigField(
                 type = "com.bitwarden.authenticatorbridge.manager.model.AuthenticatorBridgeConnectionType",

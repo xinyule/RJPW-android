@@ -7,6 +7,6 @@ import com.bitwarden.authenticatorbridge.manager.model.AuthenticatorBridgeConnec
  */
 internal fun AuthenticatorBridgeConnectionType.toPackageName() =
     when (this) {
-        AuthenticatorBridgeConnectionType.RELEASE -> "com.x8bit.bitwarden"
-        AuthenticatorBridgeConnectionType.DEV -> "com.x8bit.bitwarden.dev"
+        AuthenticatorBridgeConnectionType.RELEASE -> "com.rjpw.android"
+        AuthenticatorBridgeConnectionType.DEV -> "com.rjpw.android.dev"
     }

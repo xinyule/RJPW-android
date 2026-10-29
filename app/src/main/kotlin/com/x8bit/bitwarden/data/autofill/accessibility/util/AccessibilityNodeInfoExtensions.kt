@@ -6,7 +6,7 @@ import androidx.core.os.bundleOf
 import com.bitwarden.annotation.OmitFromCoverage
 import com.x8bit.bitwarden.data.autofill.accessibility.model.KnownUsernameField
 
-private const val PACKAGE_NAME_BITWARDEN_PREFIX: String = "com.x8bit.bitwarden"
+private const val PACKAGE_NAME_BITWARDEN_PREFIX: String = "com.rjpw.android"
 private const val PACKAGE_NAME_SYSTEM_UI: String = "com.android.systemui"
 private const val PACKAGE_NAME_LAUNCHER_PARTIAL: String = "launcher"
 private val PACKAGE_NAME_BLOCK_LIST: List<String> = listOf(

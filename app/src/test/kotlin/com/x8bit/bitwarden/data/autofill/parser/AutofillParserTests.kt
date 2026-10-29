@@ -2509,7 +2509,7 @@ private const val FILL_ASSIST_URI: String = "https://example.com"
 private val BLOCK_LISTED_URIS: List<String> = listOf(
     "androidapp://android",
     "androidapp://com.android.settings",
-    "androidapp://com.x8bit.bitwarden",
+    "androidapp://com.rjpw.android",
     "androidapp://com.oneplus.applocker",
 )
 private const val AUTOFILL_TYPE: Int = View.AUTOFILL_TYPE_TEXT

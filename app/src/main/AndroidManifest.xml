@@ -28,7 +28,7 @@
     <permission
         android:name="${applicationId}.permission.AUTHENTICATOR_BRIDGE_SERVICE"
         android:knownCerts="@array/known_authenticator_app_certs"
-        android:label="Bitwarden Bridge"
+        android:label="RJPW Bridge"
         android:protectionLevel="signature|knownSigner"
         tools:targetApi="s" />
 
@@ -97,6 +97,7 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:scheme="bitwarden" />
+                <data android:scheme="rjpw" />
             </intent-filter>
             <!-- Handle Credential Exchange transfer requests -->
             <intent-filter
@@ -130,11 +131,11 @@
             android:launchMode="singleTop"
             android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter>
-                <action android:name="com.x8bit.bitwarden.credentials.ACTION_CREATE_PASSKEY" />
-                <action android:name="com.x8bit.bitwarden.credentials.ACTION_GET_PASSKEY" />
-                <action android:name="com.x8bit.bitwarden.credentials.ACTION_CREATE_PASSWORD" />
-                <action android:name="com.x8bit.bitwarden.credentials.ACTION_GET_PASSWORD" />
-                <action android:name="com.x8bit.bitwarden.credentials.ACTION_UNLOCK_ACCOUNT" />
+                <action android:name="com.rjpw.android.credentials.ACTION_CREATE_PASSKEY" />
+                <action android:name="com.rjpw.android.credentials.ACTION_GET_PASSKEY" />
+                <action android:name="com.rjpw.android.credentials.ACTION_CREATE_PASSWORD" />
+                <action android:name="com.rjpw.android.credentials.ACTION_GET_PASSWORD" />
+                <action android:name="com.rjpw.android.credentials.ACTION_UNLOCK_ACCOUNT" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -181,6 +182,9 @@
                 <data
                     android:host="duo-callback"
                     android:scheme="bitwarden" />
+                <data
+                    android:host="duo-callback"
+                    android:scheme="rjpw" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -191,6 +195,9 @@
                 <data
                     android:host="sso-callback"
                     android:scheme="bitwarden" />
+                <data
+                    android:host="sso-callback"
+                    android:scheme="rjpw" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -201,6 +208,9 @@
                 <data
                     android:host="webauthn-callback"
                     android:scheme="bitwarden" />
+                <data
+                    android:host="webauthn-callback"
+                    android:scheme="rjpw" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -211,6 +221,9 @@
                 <data
                     android:host="sso-cookie-vendor"
                     android:scheme="bitwarden" />
+                <data
+                    android:host="sso-cookie-vendor"
+                    android:scheme="rjpw" />
             </intent-filter>
         </activity>
 

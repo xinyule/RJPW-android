@@ -9,7 +9,7 @@ class AuthenticatorBridgeConnectionTypeExtensionsTest {
     @Test
     fun `toPackageName RELEASE should map to correct release package`() {
         assertEquals(
-            "com.x8bit.bitwarden",
+            "com.rjpw.android",
             AuthenticatorBridgeConnectionType.RELEASE.toPackageName(),
         )
     }
@@ -17,7 +17,7 @@ class AuthenticatorBridgeConnectionTypeExtensionsTest {
     @Test
     fun `toPackageName DEV should map to correct dev package`() {
         assertEquals(
-            "com.x8bit.bitwarden.dev",
+            "com.rjpw.android.dev",
             AuthenticatorBridgeConnectionType.DEV.toPackageName(),
         )
     }

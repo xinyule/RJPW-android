@@ -122,8 +122,8 @@ class CredentialManagerPendingIntentManagerImpl(
 }
 
 private val CREDENTIAL_ACTIVITY_CLASS = com.x8bit.bitwarden.CredentialProviderActivity::class.java
-private const val CREATE_PASSKEY_ACTION = "com.x8bit.bitwarden.credentials.ACTION_CREATE_PASSKEY"
-private const val UNLOCK_ACCOUNT_ACTION = "com.x8bit.bitwarden.credentials.ACTION_UNLOCK_ACCOUNT"
-private const val GET_PASSKEY_ACTION = "com.x8bit.bitwarden.credentials.ACTION_GET_PASSKEY"
-private const val CREATE_PASSWORD_ACTION = "com.x8bit.bitwarden.credentials.ACTION_CREATE_PASSWORD"
-private const val GET_PASSWORD_ACTION = "com.x8bit.bitwarden.credentials.ACTION_GET_PASSWORD"
+private const val CREATE_PASSKEY_ACTION = "com.rjpw.android.credentials.ACTION_CREATE_PASSKEY"
+private const val UNLOCK_ACCOUNT_ACTION = "com.rjpw.android.credentials.ACTION_UNLOCK_ACCOUNT"
+private const val GET_PASSKEY_ACTION = "com.rjpw.android.credentials.ACTION_GET_PASSKEY"
+private const val CREATE_PASSWORD_ACTION = "com.rjpw.android.credentials.ACTION_CREATE_PASSWORD"
+private const val GET_PASSWORD_ACTION = "com.rjpw.android.credentials.ACTION_GET_PASSWORD"

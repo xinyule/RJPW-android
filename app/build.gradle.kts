@@ -46,7 +46,7 @@ val ciProperties = Properties().apply {
 base {
     // Set the base archive name for publishing purposes. This is used to derive the
     // APK and AAB artifact names when uploading to Firebase and Play Store.
-    archivesName.set("com.x8bit.bitwarden")
+    archivesName.set("RJPW")
 }
 
 room3 {
@@ -60,7 +60,7 @@ configure<ApplicationExtension> {
     }
 
     defaultConfig {
-        applicationId = "com.x8bit.bitwarden"
+        applicationId = "com.rjpw.android"
         minSdk {
             version = release(libs.versions.minSdk.get().toInt())
         }

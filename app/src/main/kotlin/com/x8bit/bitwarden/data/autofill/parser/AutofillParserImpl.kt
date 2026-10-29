@@ -33,9 +33,9 @@ import timber.log.Timber
 private val BLOCK_LISTED_URIS: List<String> = listOf(
     "androidapp://android",
     "androidapp://com.android.settings",
-    "androidapp://com.x8bit.bitwarden",
-    "androidapp://com.x8bit.bitwarden.beta",
-    "androidapp://com.x8bit.bitwarden.dev",
+    "androidapp://com.rjpw.android",
+    "androidapp://com.rjpw.android.beta",
+    "androidapp://com.rjpw.android.dev",
     "androidapp://com.oneplus.applocker",
 )
 
