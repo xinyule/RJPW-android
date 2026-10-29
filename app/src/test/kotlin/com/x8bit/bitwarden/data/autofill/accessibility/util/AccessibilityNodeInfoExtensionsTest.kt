@@ -127,7 +127,7 @@ class AccessibilityNodeInfoExtensionsTest {
     @Test
     fun `isSystemPackage when packageName is populated with non system UI package should return false`() {
         val accessibilityNodeInfo = mockk<AccessibilityNodeInfo> {
-            every { packageName } returns "com.x8bit.bitwarden.beta"
+            every { packageName } returns "com.rjpw.android.beta"
         }
 
         assertFalse(accessibilityNodeInfo.isSystemPackage)
@@ -164,7 +164,7 @@ class AccessibilityNodeInfoExtensionsTest {
     @Test
     fun `shouldSkipPackage when packageName is prefixed with bitwarden package should return true`() {
         val accessibilityNodeInfo = mockk<AccessibilityNodeInfo> {
-            every { packageName } returns "com.x8bit.bitwarden.beta"
+            every { packageName } returns "com.rjpw.android.beta"
         }
 
         assertTrue(accessibilityNodeInfo.shouldSkipPackage)

@@ -40,7 +40,7 @@ class AuthenticatorBridgeManagerTest {
     private val context = mockk<Context> {
         every { applicationContext } returns this
         every {
-            packageManager.getPackageInfo("com.x8bit.bitwarden.dev", 0)
+            packageManager.getPackageInfo("com.rjpw.android.dev", 0)
         } returns mockk()
     }
     private val mockBridgeService: IAuthenticatorBridgeService = mockk()
