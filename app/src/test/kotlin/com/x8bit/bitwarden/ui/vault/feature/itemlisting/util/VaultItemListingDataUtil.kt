@@ -23,7 +23,7 @@ fun createMockDisplayItemForCipher(
     secondSubtitleTestTag: String? = null,
     requiresPasswordReprompt: Boolean = true,
     iconData: IconData = IconData.Network(
-        uri = "https://icons.bitwarden.net/www.mockuri.com/icon.png",
+        uri = "https://pw.7052.cn/icons/www.mockuri.com/icon.png",
         fallbackIconRes = BitwardenDrawable.ic_globe,
     ),
     isAutofill: Boolean = false,
@@ -443,10 +443,10 @@ fun createMockDisplayItemForSend(
                 ),
                 overflowOptions = listOf(
                     ListingItemOverflowAction.SendAction.CopyUrlClick(
-                        sendUrl = "https://send.bitwarden.com/#mockAccessId-$number/mockKey-$number",
+                        sendUrl = "https://pw.7052.cn/#/send/mockAccessId-$number/mockKey-$number",
                     ),
                     ListingItemOverflowAction.SendAction.ShareUrlClick(
-                        sendUrl = "https://send.bitwarden.com/#mockAccessId-$number/mockKey-$number",
+                        sendUrl = "https://pw.7052.cn/#/send/mockAccessId-$number/mockKey-$number",
                     ),
                     ListingItemOverflowAction.SendAction.ViewClick(
                         sendId = "mockId-$number",
@@ -492,10 +492,10 @@ fun createMockDisplayItemForSend(
                 ),
                 overflowOptions = listOf(
                     ListingItemOverflowAction.SendAction.CopyUrlClick(
-                        sendUrl = "https://send.bitwarden.com/#mockAccessId-$number/mockKey-$number",
+                        sendUrl = "https://pw.7052.cn/#/send/mockAccessId-$number/mockKey-$number",
                     ),
                     ListingItemOverflowAction.SendAction.ShareUrlClick(
-                        sendUrl = "https://send.bitwarden.com/#mockAccessId-$number/mockKey-$number",
+                        sendUrl = "https://pw.7052.cn/#/send/mockAccessId-$number/mockKey-$number",
                     ),
                     ListingItemOverflowAction.SendAction.ViewClick(
                         sendId = "mockId-$number",
@@ -541,10 +541,10 @@ fun createMockDisplayItemForSend(
                 ),
                 overflowOptions = listOf(
                     ListingItemOverflowAction.SendAction.CopyUrlClick(
-                        sendUrl = "https://send.bitwarden.com/#mockAccessId-$number/mockKey-$number",
+                        sendUrl = "https://pw.7052.cn/#/send/mockAccessId-$number/mockKey-$number",
                     ),
                     ListingItemOverflowAction.SendAction.ShareUrlClick(
-                        sendUrl = "https://send.bitwarden.com/#mockAccessId-$number/mockKey-$number",
+                        sendUrl = "https://pw.7052.cn/#/send/mockAccessId-$number/mockKey-$number",
                     ),
                     ListingItemOverflowAction.SendAction.ViewClick(
                         sendId = "mockId-$number",

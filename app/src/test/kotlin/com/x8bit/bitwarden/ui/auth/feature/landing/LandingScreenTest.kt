@@ -12,6 +12,7 @@ import androidx.compose.ui.test.hasAnyAncestor
 import androidx.compose.ui.test.isDialog
 import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithContentDescription
+import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
@@ -380,8 +381,7 @@ class LandingScreenTest : BitwardenComposeTest() {
 
         // Clicking item on dialog
         composeTestRule
-            .onNodeWithText("Self-hosted")
-            .assert(hasAnyAncestor(isDialog()))
+            .onNodeWithTag("AlertRadioButtonOption")
             .performClick()
 
         verify {
